@@ -1,0 +1,141 @@
+                                /* ---------- style for all device different desktop-----------*/
+                                
+                                @media (max-width: 1024px) {
+                                    /* ------------ Choice -------------*/
+                                    .choice {
+                                        width: 70%;
+                                    }
+                                    /* -------------- Register ------------ */
+                                    .head {
+                                        margin-bottom: 16px;
+                                        font-size: 30px;
+                                    }
+                                    .register__item {
+                                        margin: 6px;
+                                        padding: 6px;
+                                    }
+                                    .register__item label {
+                                        margin-bottom: 6px;
+                                    }
+                                    .register__reCaptcha {
+                                        transform: scale(0.85);
+                                    }
+                                    .register__item input {
+                                        font-size: 14px;
+                                    }
+                                    .register__btn-item {
+                                        padding: 14px;
+                                        font-size: 14px;
+                                        margin: 6px;
+                                    }
+                                    .register__container::after {
+                                        left: 108%;
+                                    }
+                                    .register__note-bottom {
+                                        font-size: 14px;
+                                    }
+                                    /* ------------ Sign In ----------------- */
+                                    .login {
+                                        min-width: 55%;
+                                        font-size: 14px;
+                                    }
+                                    .login__container {
+                                        padding: 36px 32px 8px 32px;
+                                    }
+                                    .login__item input {
+                                        font-size: 14px;
+                                    }
+                                }
+                                /* ------------------- Tablet ------------------- */
+                                
+                                @media (min-width: 768px) and (max-width: 1024px) {
+                                    /* -------------- Register ------------ */
+                                    .register {
+                                        width: 60%;
+                                        padding: 16px 80px 8px 32px;
+                                    }
+                                    .choice {
+                                        width: 80%;
+                                        transform: translateY(50%);
+                                    }
+                                    .title__choice {
+                                        font-size: 24px;
+                                    }
+                                    .register__reCaptcha {
+                                        left: 88%;
+                                        transform: scale(0.55);
+                                    }
+                                }
+                                /* ------------------- Mobile ------------------*/
+                                
+                                @media (max-width: 667px) {
+                                    .register__wrap {
+                                        display: flex;
+                                        flex-direction: column;
+                                    }
+                                    .register__container::after {
+                                        bottom: 22%;
+                                        left: 109%;
+                                    }
+                                    .choice {
+                                        width: 90%;
+                                        transform: translateY(50%);
+                                    }
+                                    .title__choice {
+                                        font-size: 24px;
+                                    }
+                                    .register__reCaptcha {
+                                        left: 80%;
+                                        transform: scale(0.6);
+                                    }
+                                }
+                                
+                                @media (max-width: 767px) and (min-width: 425px) {
+                                    /* -------------- Register ------------ */
+                                    .app__logo {
+                                        transform: scale(0.8);
+                                        padding-top: 16px;
+                                    }
+                                    .register {
+                                        width: 75%;
+                                        padding: 16px 80px 8px 32px;
+                                    }
+                                    .choice {
+                                        width: 90%;
+                                        transform: translateY(50%);
+                                    }
+                                    .title__choice {
+                                        font-size: 24px;
+                                    }
+                                    /* ------------ Sign In ----------------- */
+                                    .login {
+                                        min-width: 55%;
+                                    }
+                                }
+                                
+                                @media (max-width: 525px) {
+                                    /* -------------- Register ------------ */
+                                    .app__logo {
+                                        transform: scale(0.8);
+                                        padding-top: 12px;
+                                    }
+                                    .register {
+                                        width: 80%;
+                                        padding: 16px 36px 8px 16px;
+                                    }
+                                    .register__container::after {
+                                        width: 2px;
+                                        left: 104%;
+                                    }
+                                    .choice__signin {
+                                        padding: 16px 74px;
+                                    }
+                                    .register__reCaptcha {
+                                        left: 80%;
+                                        transform: scale(0.45);
+                                    }
+                                    /* ------------ Sign In ----------------- */
+                                    .login {
+                                        min-width: 95%;
+                                    }
+                                }

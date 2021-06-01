@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CLIQUE</title>
+    <!--Link css-->
+    <link rel="stylesheet" href="./app/css/main.css">
+    <link rel="stylesheet" href="./app/css/base.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
+    <link rel="stylesheet" href="./app/css/responsive.css">
+</head>
+
+<body>
+
+    <div class="app">
+        <!--Logo of app-->
+        <div class="app__logo">
+            <img src="./app/images/logo.png" alt="" srcset="">
+        </div>
+        <!--Start Register form-->
+        <div class="register">
+            <div class="register__container">
+                <div class="register__head head">Register</div>
+                <form class="register__wrap">
+                    <div class="register__item">
+                        <label for="name">Talent Name</label>
+                        <input type="text" name="" id="name">
+                    </div>
+                    <div class="register__item">
+                        <label for="web">Website</label>
+                        <input type="text" name="" id="web">
+                    </div>
+                    <div class="register__item">
+                        <label for="contact">Contact</label>
+                        <input type="text" name="" id="contact">
+                    </div>
+                    <div class="register__item">
+                        <label for="fb">Facebook</label>
+                        <input type="text" name="" id="fb">
+                    </div>
+                    <div class="register__item">
+                        <label for="phone">Phone</label>
+                        <input type="text" name="" id="phone">
+                    </div>
+                    <div class="register__item">
+                        <label for="ins">Instagram</label>
+                        <input type="text" name="" id="ins">
+                    </div>
+                    <div class="register__item">
+                        <label for="mail">Email</label>
+                        <input type="text" name="" id="mail">
+                    </div>
+                    <div class="register__item">
+                        <label for="twitter">Twitter</label>
+                        <input type="text" name="" id="twitter">
+                    </div>
+                    <div class="register__item">
+                        <label for="pass">Password</label>
+                        <input type="password" name="" id="pass">
+                    </div>
+                    <div class="register__item">
+                        <label for="repass">Confirm password</label>
+                        <input type="password" name="" id="repass">
+                    </div>
+                    <div class="register__item desc">
+                        <label for="desc">Description of Talent</label>
+                        <textarea name="" id="desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</textarea>
+                    </div>
+                </form>
+                <div class="register__btn-group">
+                    <button class="register__btn-item" onclick=showChoice()>Back</button>
+                    <button class="register__btn-item btn--green">Next</button>
+                </div>
+                <p class="register__note-bottom">Already have a Clique account?
+                    <a href="Login.html" class="link__signIn pointer">Sign In</a>
+                </p>
+            </div>
+
+        </div>
+        <div class="register__reCaptcha">
+            <img class="register__reCaptcha--img" src="./app/images/capcha.png"></img>
+            <div class="register__reCaptcha--text">reCAPTCHA</div>
+        </div>
+        <!--End register form-->
+    </div>
+
+    <!--Link javacript-->
+    <script src="./app/js/main.js"></script>
+</body>
+
+</html>

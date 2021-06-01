@@ -1,0 +1,384 @@
+/* ---------------- Style base ----------------*/
+
+:root {
+    --text-color: #000000;
+}
+
+* {
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--text-color);
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background: #3F3F3F url("../images/background.png") no-repeat top left;
+    box-shadow: inset 0px 10px 180px #000, inset 0px -10px 180px #000;
+    background-size: cover;
+    height: 100vh;
+    width: 100vw;
+}
+
+.app {
+    /* padding-top: 32px; */
+}
+
+.app__logo {
+    padding-top: 12px;
+    text-align: center;
+}
+
+
+/* ----------------- choice register or sign in ------------- */
+
+.choice {
+    font-size: 16px;
+    margin: 0 auto;
+    width: 50%;
+    position: relative;
+    transform: translateY(100%);
+}
+
+.title__choice {
+    font-size: 34px;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    text-shadow: 1px 2px 5px rgb(34, 33, 33);
+}
+
+.choice__btn-group {
+    margin: 24px auto;
+    text-align: center;
+}
+
+.choice__btn-item {
+    color: white;
+    display: inline-block;
+    padding: 16px 64px;
+    border-radius: 3px;
+    cursor: pointer;
+    margin: 8px;
+}
+
+.choice__register:hover {
+    background-color: #fc1726;
+    transition: all 0.3s;
+}
+
+.choice__register {
+    background-color: #E60A17;
+    transition: all 0.3s;
+}
+
+.choice__signin {
+    background-color: #2F9A4C;
+    transition: all 0.3s;
+}
+
+.choice__signin:hover {
+    background-color: #21d350;
+    transition: all 0.3s;
+}
+
+.choice__home {
+    background-color: transparent;
+    transition: all 0.3s;
+    border: 1px solid #A8A8A8;
+    padding: 14px 30px;
+}
+
+.choice__home:hover {
+    background-color: #26b7ec;
+    transition: all 0.3s;
+}
+
+
+/* ---------------- 1. Register ------------------ */
+
+.register {
+    width: 50%;
+    /* height: 100%; */
+    margin: 4px auto;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px 120px 12px 56px;
+    /* transform: scale(0.92); */
+    /* display: none; */
+}
+
+.register__container {
+    /* padding: 16px 120px 16px 56px; */
+    padding-top: 8px;
+    position: relative;
+}
+
+
+/* 
+.register__wrap {
+    position: relative;
+} */
+
+.register__container::after {
+    position: absolute;
+    content: '';
+    width: 5px;
+    height: 70%;
+    background-color: #878686;
+    bottom: 18%;
+    left: 110%;
+    border-radius: 15px;
+    margin-top: 8px;
+}
+
+.register__wrap,
+.register__btn-group {
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+.register__item {
+    background-color: white;
+    padding: 8px;
+    margin: 8px;
+    border-radius: 3px;
+    /* width: 45%; */
+}
+
+.register__item:nth-child(11) {
+    height: auto;
+    grid-column: 1 / 3;
+}
+
+.register__item.desc textarea {
+    width: 100%;
+    border: none;
+    resize: none;
+    outline: none;
+    overflow: hidden
+}
+
+.register__item label {
+    display: block;
+    font-size: 12px;
+    margin-bottom: 8px;
+}
+
+.register__item input {
+    font-size: 16px;
+    border: none;
+    outline: none;
+}
+
+.register__btn-group button {
+    color: white;
+}
+
+.register__btn-item {
+    padding: 16px;
+    margin: 8px;
+    border-radius: 3px;
+    border: 1px solid #707070;
+    background-color: transparent;
+    transition: 0.3s all;
+    cursor: pointer;
+}
+
+.btn--green {
+    background-color: #2F9A4C;
+    color: white;
+}
+
+.register__btn-item:hover {
+    transition: 0.3s all;
+    background-color: #E60A17;
+}
+
+.btn--green:hover {
+    background-color: #11dc47;
+    transition: 0.3s all;
+}
+
+.register__note-bottom {
+    color: white;
+    text-align: center;
+    margin-top: 24px;
+}
+
+.link__signIn {
+    color: #E60A17;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.link__signIn:hover {
+    color: #21d350;
+    transition: all 0.3s;
+}
+
+.register__reCaptcha {
+    position: fixed;
+    top: 85%;
+    left: 85%;
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.register__reCaptcha--img {}
+
+.register__reCaptcha--text {
+    color: #878686;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+
+/* ----------------- 2. LOG IN ----------------- */
+
+.login {
+    width: 40%;
+    margin: 48px auto;
+    /* display: none; */
+}
+
+.login__container {
+    max-width: 400px;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 56px 48px 16px 48px;
+    margin: 0 auto;
+}
+
+.login__wrap {}
+
+.login__wrap span {
+    color: white;
+}
+
+.login__item {
+    background-color: white;
+    border-radius: 3px;
+    margin: 16px 0px;
+    padding: 12px;
+}
+
+.login__item label {
+    display: none;
+    font-size: 12px;
+}
+
+.login__item.active label {
+    display: block;
+}
+
+.login__item.active input {
+    padding: 0px;
+}
+
+.login__item input {
+    font-size: 16px;
+    color: var(--text-color);
+    padding: 6px;
+}
+
+.login__item.btn--green {
+    background-color: #2F9A4C;
+}
+
+.login__item.btn--green:hover {
+    background-color: #1fe152;
+}
+
+.login__other-seperate {
+    color: #A8A8A8;
+    text-align: center;
+    position: relative;
+}
+
+.login__other-seperate::after,
+.login__other-seperate::before {
+    content: '';
+    height: 1px;
+    width: 40%;
+    position: absolute;
+    top: 50%;
+    left: 0%;
+    background-color: #707070;
+}
+
+.login__other-seperate::after {
+    left: 60%;
+}
+
+.login__byTwitter {
+    background-color: #3CA6CC;
+    transition: all 0.3s;
+    color: white;
+}
+
+.login__byTwitter i,
+.login__byFaceBook i {
+    color: white;
+    margin-left: ;
+}
+
+.login__byTwitter:hover {
+    background-color: #26b7ec;
+    transition: all 0.3s;
+}
+
+.login__byFaceBook {
+    background-color: #264F88;
+    transition: all 0.3s;
+}
+
+.login__byFaceBook:hover {
+    background-color: #1e59ac;
+    transition: all 0.3s;
+}
+
+.forgot__pass {
+    width: 100%;
+    text-align: right;
+}
+
+.forgot__pass a {
+    color: white;
+    text-decoration: underline;
+    font-size: 12px;
+    margin-right: 8px;
+}
+
+.link__register {
+    color: white;
+    margin-top: 32px;
+}
+
+.link__register a {
+    color: #E60A17;
+    text-decoration: underline;
+}
+
+.link__register a:hover {
+    color: #21d350;
+    transition: all 0.3s;
+}
+
+.login__other {
+    color: #A8A8A8;
+    margin-top: 56px;
+}
+
+.login__other a {
+    color: white;
+}
+
+.login__other a:hover {
+    text-decoration: underline;
+    transition: all 0.3s;
+}
+
+.login__other-seperate {
+    margin: 10px 8px;
+}
