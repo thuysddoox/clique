@@ -31,7 +31,6 @@ body {
 .app__logo {
     padding-top: 8px;
     text-align: center;
-    transform: scale(0.85);
 }
 
 .app {
