@@ -29,12 +29,13 @@ body {
 }
 
 .app__logo {
-    padding-top: 24px;
+    padding-top: 8px;
     text-align: center;
+    transform: scale(0.85);
 }
 
 .app {
-    padding: 12px;
+    padding: 8px;
 }
 
 
@@ -110,25 +111,15 @@ body {
 
 .register {
     width: 50%;
-    /* height: 100%; */
-    margin: 24px auto;
+    margin: 8px auto;
     background-color: rgba(0, 0, 0, 0.7);
     padding: 20px 120px 12px 56px;
-    /* transform: scale(0.92); */
-    /* display: none; */
 }
 
 .register__container {
-    /* padding: 16px 120px 16px 56px; */
     padding-top: 8px;
     position: relative;
 }
-
-
-/* 
-.register__wrap {
-    position: relative;
-} */
 
 .register__container::after {
     position: absolute;
@@ -151,7 +142,7 @@ body {
 .register__item {
     background-color: white;
     padding: 8px;
-    margin: 8px;
+    margin: 6px;
     border-radius: 3px;
     /* width: 45%; */
 }
@@ -172,7 +163,7 @@ body {
 .register__item label {
     display: block;
     font-size: 12px;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
 }
 
 .register__item input {
@@ -295,6 +286,7 @@ body {
 
 .login__item.btn--green {
     background-color: #2F9A4C;
+    padding: 12px;
 }
 
 .login__item.btn--green:hover {
@@ -318,6 +310,10 @@ body {
     background-color: #707070;
 }
 
+.text--left {
+    text-align: left;
+}
+
 .login__other-seperate::after {
     left: 60%;
 }
@@ -331,7 +327,15 @@ body {
 .login__byTwitter i,
 .login__byFaceBook i {
     color: white;
-    margin-left: ;
+    padding: 4px;
+    display: inline-block;
+}
+
+.login__byTwitter span,
+.login__byFaceBook span {
+    width: 80%;
+    text-align: center;
+    display: inline-block;
 }
 
 .login__byTwitter:hover {
