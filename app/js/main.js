@@ -29,7 +29,7 @@ function showChoice() {
 }
 
 function showBarBtn() {
-    if (bar__content.style.left !== "0px")
-        bar__content.style.left = "0px";
-    else bar__content.style.left = "-300px";
+    if (bar.style.left !== "0px")
+        bar.style.left = "0px";
+    else bar.style.left = "-300px";
 }

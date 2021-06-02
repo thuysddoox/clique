@@ -28,12 +28,8 @@ body {
     /* padding-bottom: 16px; */
 }
 
-.app {
-    /* padding-top: 32px; */
-}
-
 .app__logo {
-    padding-top: 16px;
+    padding-top: 24px;
     text-align: center;
 }
 
@@ -51,7 +47,6 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    padding-top: 32px;
 }
 
 .title__choice {
