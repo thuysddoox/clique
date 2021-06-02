@@ -9,12 +9,33 @@
     <!--Link css-->
     <link rel="stylesheet" href="./app/css/base.css">
     <link rel="stylesheet" href="./app/css/home.css">
+    <link rel="stylesheet" href="./app/css/home__responsive.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
 </head>
 
 <body>
     <div class="homepage">
         <div class="home__header">
+            <div class="bar__btn">
+                <i class="fas fa-bars"></i>
+                <div class="bar__content">
+                    <div class="bar__content-item">
+                        <i class="fas fa-search"></i> <span>Search</span>
+                        <!-- <input type="search" class="header__search--text" id="search" placeholder="Search"> -->
+                    </div>
+                    <div class="bar__content-item">
+                        <i class="fas fa-filter"></i> <span>Filter</span>
+                    </div>
+                    <div class="bar__content-item">
+                        <i class="fas fa-bell"></i> <span>Notification</span>
+                    </div>
+                    <div class="bar__content-item">
+                        <i class="fas fa-plus"></i> <span>New post</span>
+                    </div>
+
+                </div>
+
+            </div>
             <div class="header__search">
                 <label for="search" class="header__search--icon"><i class="fas fa-search"></i></label>
                 <input type="search" class="header__search--text" id="search" placeholder="Search">
@@ -22,7 +43,6 @@
             <div class="header__logo">
                 <img src="./app/images/CLINIK.png" alt="Logo">
             </div>
-
             <div class="header__other">
                 <div class="header__icon">
                     <div class="header__icon--filter header__icon--item">
@@ -117,7 +137,7 @@
                     <div class="post__content">
                         <div class="post__body">
                             <div class="post__item-channel">
-                                LEWIS HAMILTOn<span class="post__item-channel--tick"><i class="fas fa-check-circle"></i></span>
+                                LEWIS HAMILTOn<span class="post__item-channel--tick"></span>
                                 <span class="post__readmore"><i class="fas fa-ellipsis-h"></i></span>
                             </div>
                             <p class="post__item-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
@@ -143,7 +163,7 @@
                     <div class="post__content">
                         <div class="post__body">
                             <div class="post__item-channel">
-                                EPL <span class="post__item-channel--tick"><i class="fas fa-check-circle"></i></span>
+                                EPL <span class="post__item-channel--tick"></span>
                                 <span class="post__readmore"><i class="fas fa-ellipsis-h"></i></span>
                             </div>
                             <p class="post__item-description">Eric Garcia taken off on a stretcher after sickening collision in Manchester City’s win over Arsenal</p>
@@ -169,7 +189,7 @@
                     <div class="post__content">
                         <div class="post__body">
                             <div class="post__item-channel">
-                                PITTSBURGH STEELERS <span class="post__item-channel--tick"><i class="fas fa-check-circle"></i></span>
+                                PITTSBURGH STEELERS <span class="post__item-channel--tick"></span>
                                 <span class="post__readmore"><i class="fas fa-ellipsis-h"></i></span>
                             </div>
                             <p class="post__item-description">Steelers to Close Facility in Observance of Juneteenth</p>
@@ -195,11 +215,11 @@
                     <div class="post__content">
                         <div class="post__body">
                             <div class="post__item-channel">
-                                STATE OF ORGIIN<span class="post__item-channel--tick"><i class="fas fa-check-circle"></i></span>
+                                STATE OF ORGIIN<span class="post__item-channel--tick"></span>
                                 <span class="post__readmore"><i class="fas fa-ellipsis-h"></i></span>
                             </div>
                             <p class="post__item-description">
-                                <p>1-2</p> Origin series and women's game in November</p>
+                                1-2 <br>Origin series and women's game in November</p>
                             <div class="post__item-type">Results</div>
                         </div>
                         <div class="post__item-bottom">
@@ -222,11 +242,12 @@
                     <div class="post__content">
                         <div class="post__body">
                             <div class="post__item-channel">
-                                EPL <span class="post__item-channel--tick"><i class="fas fa-check-circle"></i></span>
+                                EPL <span class="post__item-channel--tick"></span>
                                 <span class="post__readmore"><i class="fas fa-ellipsis-h"></i></span>
                             </div>
                             <p class="post__item-description">
-                                <p>1-2</p>Controversy mars EPL return as Sheffield, Aston Villa draw</p>
+                                1-2 <br> Controversy mars EPL return as Sheffield, Aston Villa draw
+                            </p>
                             <div class="post__item-type">News</div>
                         </div>
                         <div class="post__item-bottom">
@@ -249,11 +270,11 @@
                     <div class="post__content">
                         <div class="post__body">
                             <div class="post__item-channel">
-                                EPL <span class="post__item-channel--tick"><i class="fas fa-check-circle"></i></span>
+                                EPL <span class="post__item-channel--tick"></span>
                                 <span class="post__readmore"><i class="fas fa-ellipsis-h"></i></span>
                             </div>
                             <p class="post__item-description">
-                                <p>1-2</p>Injuries, red cards and a $640k-a-week problem: How Arsenal got even worse after lockdown</p>
+                                1-2 <br> Injuries, red cards and a $640k-a-week problem: How Arsenal got even worse after lockdown</p>
                             <div class="post__item-type">News</div>
                         </div>
                         <div class="post__item-bottom">
@@ -276,7 +297,7 @@
                     <div class="post__content">
                         <div class="post__body">
                             <div class="post__item-channel">
-                                Queen<span class="post__item-channel--tick"><i class="fas fa-check-circle"></i></span>
+                                Queen<span class="post__item-channel--tick"></span>
                                 <span class="post__readmore"><i class="fas fa-ellipsis-h"></i></span>
                             </div>
                             <p class="post__item-description">
@@ -303,7 +324,7 @@
                     <div class="post__content">
                         <div class="post__body">
                             <div class="post__item-channel">
-                                Pittsburgh Steelers<span class="post__item-channel--tick"><i class="fas fa-check-circle"></i></span>
+                                Pittsburgh Steelers<span class="post__item-channel--tick"></span>
                                 <span class="post__readmore"><i class="fas fa-ellipsis-h"></i></span>
                             </div>
                             <p class="post__item-description">
@@ -327,8 +348,6 @@
                 </div>
             </div>
         </div>
-
-
 
     </div>
 

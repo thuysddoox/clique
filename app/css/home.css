@@ -22,7 +22,7 @@
     min-width: 20%;
     background-color: #F5F5F5;
     padding: 8px 16px;
-    display: flex;
+    display: inline-flex;
     align-items: center;
 }
 
@@ -30,7 +30,7 @@
 
 .header__search--text {
     color: #707070;
-    background-color: #F5F5F5;
+    background-color: transparent;
     padding: 0px 16px;
 }
 
@@ -80,8 +80,11 @@
     align-items: center;
 }
 
-.header__user--avatar {
+.header__user--avatar img {
     cursor: pointer;
+    border-radius: 50%;
+    width: 100%;
+    height: auto;
 }
 
 .header__user--down {
@@ -100,11 +103,14 @@
     margin-top: 84px;
     border-bottom: 1px solid #F4F4F4;
     z-index: 1;
+    /* display: none; */
 }
 
 .home__navbar-list {
     margin: 0 auto;
     display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
     justify-content: space-around;
     align-items: center;
     width: 70%;
@@ -124,16 +130,80 @@
 }
 
 
+/* ---------- Navbar mobile -----------*/
+
+.bar__btn {
+    display: none;
+    position: relative;
+    cursor: pointer;
+    /* display: inline-block; */
+}
+
+.bar__btn>i {
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 10px;
+}
+
+.bar__content {
+    position: absolute;
+    top: 100%;
+    left: -300px;
+    z-index: 5;
+    margin: 16px 0px 0px -16px;
+    background-color: #E60A17;
+    width: 300px;
+    transition: all 0.5s;
+    /* display: none; */
+}
+
+.bar__btn::after {
+    position: absolute;
+    content: '';
+    width: 300px;
+    height: 30px;
+    background-color: transparent;
+    top: 70%;
+    left: 0%;
+}
+
+.bar__btn:hover .bar__content {
+    /* display: block; */
+    left: 0px;
+    transition: all 0.5s;
+    /* color: #E60A17; */
+}
+
+.bar__content-item {
+    padding: 8px;
+    color: white;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.bar__content-item:hover {
+    background-color: #ff2e3c;
+    transition: all 0.3s;
+}
+
+.bar__content-item i {
+    display: inline-block;
+    padding: 8px;
+}
+
+
 /* ---------------- 3. Home body --------------- */
 
 .home__body {
-    margin: 12px;
     background-color: white;
 }
 
 .posts__list {
     column-count: 5;
-    column-gap: 1em;
+    column-gap: 8px;
+    margin: 12px;
 }
 
 
@@ -144,13 +214,21 @@
     background-color: #FAFAF9;
     border-radius: 7px;
     box-shadow: 0px 0px 8px#d1d1d1;
-    margin: 12px;
+    margin: 10px 6px;
     display: inline-block;
+    transition: all 0.3s;
+}
+
+.post__item:hover {
+    box-shadow: 1px 1px 10px#909090;
+    transition: all 0.3s;
 }
 
 .post__item-img img {
     width: 100%;
-    height: auto;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    cursor: pointer;
 }
 
 .post__content {}
@@ -165,6 +243,7 @@
     position: relative;
     font-size: 12px;
     cursor: pointer;
+    text-transform: uppercase;
 }
 
 .post__readmore {
@@ -177,11 +256,16 @@
 .post__item-description {
     color: #203442;
     padding: 14px 0px;
-    font-size: 18px;
+    /* font-size: 18px; */
     line-height: 28px;
+    cursor: pointer;
 }
 
-.post__item-description--infor {}
+.post__item-description--infor {
+    font-size: 14px;
+    color: #203442;
+    padding-bottom: 8px;
+}
 
 .post__item-channel--tick {
     color: rgb(17, 117, 240);
