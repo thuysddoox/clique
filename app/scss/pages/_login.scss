@@ -1,0 +1,169 @@
+/* ======================= START STYLE LOGIN FORM ==============================*/
+
+
+/* --------------------- DESKTOP ----------------------- */
+
+.loginByApp {
+    @extend %pointer;
+    padding: 12px;
+    i {
+        color: white;
+        padding: 4px;
+        display: inline-block;
+    }
+    span {
+        width: 80%;
+        text-align: center;
+        display: inline-block;
+    }
+    &:hover {
+        transition: all 0.3s;
+    }
+}
+
+.login {
+    width: 40%;
+    margin: 32px auto;
+    &__container {
+        max-width: 400px;
+        background-color: rgba(0, 0, 0, 0.7);
+        padding: 56px 48px 16px 48px;
+        margin: 0 auto;
+    }
+    &__head {
+        @extend %headForm;
+    }
+    &__wrap {
+        span {
+            color: white;
+        }
+    }
+    &__item {
+        background-color: white;
+        border-radius: 3px;
+        @include setPadMar1(8px, 8px);
+        input {
+            font-size: 16px;
+            color: $textColor-main-Input;
+            padding: 6px;
+        }
+        &.btn--green {
+            @extend %btn--green;
+            padding: 12px;
+        }
+        label {
+            display: none;
+            font-size: 12px;
+        }
+        & .active {
+            label {
+                display: block;
+            }
+            input {
+                padding: 0px;
+            }
+        }
+    }
+    &__other-seperate {
+        color: #A8A8A8;
+        text-align: center;
+        position: relative;
+        margin: 10px 8px;
+        &::after,
+        &::before {
+            @include position(absolute, 50%, none, none, 0%, 0, 0);
+            content: '';
+            height: 1px;
+            width: 40%;
+            background-color: #707070;
+        }
+        &::after {
+            left: 60%;
+        }
+    }
+    &__byTwitter {
+        @extend .loginByApp;
+        background-color: #3CA6CC;
+        &:hover {
+            background-color: #26b7ec;
+        }
+    }
+    &__byFaceBook {
+        @extend .loginByApp;
+        background-color: #264F88;
+        &:hover {
+            background-color: #1e59ac;
+        }
+    }
+    .forgot__pass {
+        width: 100%;
+        text-align: right;
+        a {
+            color: white;
+            text-decoration: underline;
+            font-size: $font-small;
+            margin-right: 8px;
+        }
+    }
+    .link__register {
+        color: white;
+        margin-top: 32px;
+        a {
+            color: #E60A17;
+            text-decoration: underline;
+            transition: all 0.3s;
+            &:hover {
+                color: #21d350;
+                transition: all 0.3s;
+            }
+        }
+    }
+    &__other {
+        color: #A8A8A8;
+        margin-top: 56px;
+        a {
+            color: white;
+            &:hover {
+                text-decoration: underline;
+                transition: all 0.3s;
+            }
+        }
+    }
+}
+
+
+/* ----------- TABLET and MOBLIE -------------*/
+
+@include MaxSizeDevice(1024px) {
+    .login {
+        min-width: 55%;
+        font-size: 14px;
+        &__container {
+            padding: 36px 32px 8px 32px;
+        }
+        &__item input {
+            font-size: 14px;
+        }
+    }
+}
+
+
+/* ---------------- TABLET -------------------- */
+
+
+/*----------------- MOBILE -------------------*/
+
+@include MaxMinSizeDevice(767px, 425px) {
+    .login {
+        min-width: 55%;
+    }
+}
+
+@include MaxSizeDevice(525px) {
+    .login {
+        min-width: 95%;
+    }
+}
+
+
+/* ======================= END STYLE LOGIN FORM ==============================*/

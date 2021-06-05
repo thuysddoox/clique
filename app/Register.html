@@ -7,31 +7,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CLIQUE</title>
     <!--Link css-->
-    <link rel="stylesheet" href="./app/css/main.css">
-    <link rel="stylesheet" href="./app/css/base.css">
+    <!-- <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/responsive.css"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
-    <link rel="stylesheet" href="./app/css/responsive.css">
+    <link rel="stylesheet" href="assets/css/styles.min.css">
 </head>
 
-<body>
+<body id="RegisterPage">
 
     <div class="app">
         <!--Logo of app-->
         <div class="app__logo">
-            <img src="./app/images/logo.png" alt="" srcset="">
-        </div>
-        <div class="choice">
-            <p class="title__choice">
-                THE WORLD'S #1 PLATForM FOR FANS AND THEIR IDOLS TO CONNECT
-            </p>
-            <div class="choice__btn-group">
-                <a class="choice__btn-item choice__register" href="./Register.html">Register</a>
-                <a class="choice__btn-item choice__signin" href="./Login.html">Login</a>
-                <a class="choice__btn-item choice__home" href="./home.html">View Home page</a>
-            </div>
+            <img src="../build/assets/images/logo.png" alt="" srcset="">
         </div>
         <!--Start Register form-->
-        <!-- <div class="register">
+        <div class="register ">
             <div class="register__container">
                 <div class="register__head head">Register</div>
                 <form class="register__wrap">
@@ -85,52 +76,20 @@
                     <button class="register__btn-item btn--green">Next</button>
                 </div>
                 <p class="register__note-bottom">Already have a Clique account?
-                    <a onclick=showLogin() class="link__signIn pointer">Sign In</a>
+                    <a href="../build/Login.html" class="link__signIn pointer">Sign In</a>
                 </p>
             </div>
 
         </div>
         <div class="register__reCaptcha">
-            <img class="register__reCaptcha--img" src="./app/images/capcha.png"></img>
+            <img class="register__reCaptcha--img" src="../build/assets/images/capcha.png"></img>
             <div class="register__reCaptcha--text">reCAPTCHA</div>
-        </div> -->
+        </div>
         <!--End register form-->
-
-        <!--Start Login Form-->
-        <!-- <div class="login">
-            <div class="login__container">
-                <div class="login__head head">Sign In</div>
-                <form class="login__wrap">
-                    <div class="login__item pad_marg8">
-                        <label for="">Email</label>
-                        <input type="text" name="" id="email" placeholder="Email" required>
-                    </div>
-                    <div class="login__item pad_marg8">
-                        <label for="pass">Password</label>
-                        <input type="password" name="" id="pass" placeholder="Password">
-                    </div>
-                    <div class="login__item pad_marg8 btn--green text--center pointer">
-                        <span>Log In</span>
-                    </div>
-
-                    <div class="forgot__pass"><a href="">Forgot Password?</a></div>
-                    <div class="login__other login__other-seperate">OR</div>
-                    <div class="login__item pad_marg8 login__byTwitter text--center pointer">
-                        <i class="fab fa-twitter"></i> <span> Twitter Log In</span>
-                    </div>
-                    <div class="login__item pad_marg8 login__byFaceBook text--center pointer">
-                        <i class="fab fa-facebook-square"></i> <span>Facebook Log In</span>
-                    </div>
-                    <p class="link__register text--center">New To Eko? <a onclick=showRegister() class="pointer">Register</a></p>
-                </form>
-            </div>
-            <div class="login__other text--center">Are you a Vender? <a href="">Log In</a></div>
-        </div> -->
-        <!--End Login Form-->
     </div>
 
     <!--Link javacript-->
-    <script src="./app/js/main.js"></script>
+    <script src="assets/js/app.min.js"></script>
 </body>
 
 </html>

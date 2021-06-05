@@ -2,7 +2,7 @@
     /* ----------------- Home header------------------*/
     /* ----------------- Home Navbar ---------------*/
     /* --------------- Post list -----------------*/
-    .posts__list {
+    .post__list {
         column-count: 4;
     }
 }
@@ -14,7 +14,7 @@
         width: 90%;
     }
     /* --------------- post list -----------------*/
-    .posts__list {
+    .post__list {
         column-count: 3;
     }
 }
@@ -54,7 +54,7 @@
         text-align: center;
     }
     /* --------------- post list -----------------*/
-    .posts__list {
+    .post__list {
         column-count: 2;
     }
 }
@@ -69,10 +69,7 @@
         grid-template-columns: auto auto auto;
     }
     /* --------------- post list -----------------*/
-    .posts__list {
+    .post__list {
         column-count: 1;
-    }
-    .post__item {
-        /* width: 90%; */
     }
 }

@@ -1,0 +1,61 @@
+@import '../abstracts/all.scss';
+#LoginPage,
+#RegisterPage,
+#InitPage {
+    @include setBackground($background-color, $background-image, cover, no-repeat, top left, fixed);
+    box-shadow: $bkShadow1, $bkShadow2;
+    html & {
+        box-shadow: $bkShadow1, $bkShadow2;
+    }
+}
+
+.app {
+    padding-top: 8px;
+}
+
+.app__logo {
+    padding: 8px;
+    text-align: center;
+}
+
+%headForm {
+    color: white;
+    font-size: 36px;
+    font-weight: bold;
+    margin: 0px 0px 16px 8px;
+}
+
+%btn--green {
+    @include button(#2F9A4C, white, none, 3px);
+    &:hover {
+        background-color: #11dc47;
+        transition: 0.3s all;
+    }
+}
+
+%pointer {
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.text--left {
+    text-align: left;
+}
+
+.text--center {
+    text-align: center;
+}
+
+@media (max-width: 1024px) {
+    %headForm {
+        margin-bottom: 16px;
+        font-size: 30px;
+    }
+}
+
+@media (max-width: 767px) and (min-width: 425px) {
+    .app__logo {
+        transform: scale(0.8);
+        padding-top: 16px;
+    }
+}

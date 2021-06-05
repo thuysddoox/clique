@@ -1,0 +1,80 @@
+@mixin button($bkColor, $textColor, $border, $border-radius) {
+    background-color: $bkColor;
+    color: $textColor;
+    cursor: pointer;
+    transition: all 0.3s;
+    border: $border;
+    border-radius: $border-radius;
+}
+
+@mixin masonry($columns, $columns-gap) {
+    column-count: $columns;
+    column-gap: $columns-gap;
+}
+
+@mixin position($position, $top, $right, $bottom, $left, $x, $y) {
+    position: $position;
+    top: $top;
+    left: $left;
+    bottom: $bottom;
+    right: $right;
+    transform: translate($x, $y);
+}
+
+@mixin flex($content, $items) {
+    display: flex;
+    justify-content: $content;
+    align-items: $items;
+}
+
+@mixin flexfull($content, $items, $dir) {
+    display: flex;
+    justify-content: $content;
+    align-items: $items;
+    flex-direction: $dir;
+    flex-wrap: wrap;
+}
+
+@mixin setBackground($color, $image, $size, $repeat, $postion, $attachment) {
+    background: $color $image $repeat $postion;
+    background-attachment: $attachment;
+    background-size: $size;
+}
+
+@mixin setPadMar4($top1, $right1, $bottom1, $left1, $top2, $right2, $bottom2, $left2) {
+    padding: $top1 $right1 $bottom1 $left1;
+    margin: $top2 $right2 $bottom2 $left2;
+}
+
+@mixin setPadMar2($top1, $left1, $top2, $left2) {
+    padding: $top1 $left1;
+    margin: $top2 $left2;
+}
+
+@mixin setPadMar1($pad, $mar) {
+    margin: $mar;
+    padding: $pad;
+}
+
+@mixin grid2Col() {
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+@mixin MaxMinSizeDevice($maxWidth, $minWidth) {
+    @media screen and (max-width: $maxWidth) and (min-width: $minWidth) {
+        @content;
+    }
+}
+
+@mixin MaxSizeDevice($maxWidth) {
+    @media screen and (max-width: $maxWidth) {
+        @content;
+    }
+}
+
+@mixin MinSizeDevice($maxWidth) {
+    @media screen and (min-width: $maxWidth) {
+        @content;
+    }
+}

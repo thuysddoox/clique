@@ -1,0 +1,272 @@
+/* ======================= START STYLE REGISTER FORM ==============================*/
+
+@import '../abstracts/mixins.scss';
+
+/* -------------- DESKTOP ---------------- */
+
+.register {
+    width: 50%;
+    margin: 8px auto;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px 120px 12px 56px;
+    // register header
+    &__head {
+        @extend %headForm;
+    }
+    // container register
+    &__container {
+        padding-top: 8px;
+        position: relative;
+        &::after {
+            @include position(absolute, auto, auto, 18%, 110%, 0, 0);
+            content: '';
+            width: 5px;
+            height: 70%;
+            background-color: #878686;
+            border-radius: 15px;
+            margin-top: 8px;
+        }
+    }
+    // wrap of form register
+    &__wrap {
+        @include grid2Col();
+    }
+    // item in form register
+    &__item {
+        @include setPadMar1(8px, 6px);
+        background-color: white;
+        border-radius: 3px;
+        // set width 100% with 1 columns for item 11th
+        &:nth-child(11) {
+            height: auto;
+            grid-column: 1 / 3;
+        }
+        label {
+            display: block;
+            font-size: $font-small;
+            margin-bottom: 6px;
+        }
+        input {
+            font-size: $fontSize-main;
+        }
+        textarea {
+            font-size: 14px;
+        }
+    }
+    // button in register form
+    &__btn {
+        &-group {
+            @include grid2Col();
+            button {
+                color: $textColor-button;
+            }
+        }
+        &-item {
+            @include setPadMar1(16px, 8px);
+            @include button(transparent, $textColor-button, 1px solid #707070, 3px);
+            &:hover {
+                transition: 0.3s all;
+                background-color: #E60A17;
+            }
+            &.btn--green {
+                @extend %btn--green;
+            }
+        }
+    }
+    //text in bottom of register
+    &__note-bottom {
+        color: white;
+        text-align: center;
+        margin-top: 24px;
+        // if have a account link to sign in
+        .link__signIn {
+            color: #E60A17;
+            text-decoration: none;
+            transition: all 0.3s;
+            &:hover {
+                color: #21d350;
+                transition: all 0.3s;
+            }
+        }
+    }
+    // recaptcha
+    &__reCaptcha {
+        @include position(fixed, 85%, none, none, 85%, 0, 0);
+        @extend %pointer;
+        opacity: 0.7;
+        &--text {
+            color: #878686;
+        }
+    }
+}
+
+.choice {
+    @include position(fixed, 50%, default, default, 50%, -50%, -50%);
+    font-size: 16px;
+    width: 50%;
+    .title__choice {
+        font-size: 34px;
+        text-transform: uppercase;
+        font-weight: bold;
+        text-align: center;
+        color: white;
+        text-shadow: 1px 2px 5px rgb(34, 33, 33);
+        line-height: 50px;
+    }
+    &__btn {
+        &-group {
+            margin: 24px auto;
+            text-align: center;
+        }
+        &-item {
+            @extend %pointer;
+            @include setPadMar4(16px, 64px, 16px, 64px, 8px, 8px, 8px, 8px);
+            color: white;
+            display: inline-block;
+            border-radius: 3px;
+        }
+    }
+    &__register {
+        background-color: #E60A17;
+        transition: all 0.3s;
+        &:hover {
+            background-color: #fc1726;
+            transition: all 0.3s;
+        }
+    }
+    &__signin {
+        background-color: #2F9A4C;
+        transition: all 0.3s;
+        &:hover {
+            background-color: #21d350;
+            transition: all 0.3s;
+        }
+    }
+    &__home {
+        background-color: transparent;
+        transition: all 0.3s;
+        border: 1px solid #A8A8A8;
+        padding: 14px 30px;
+        &:hover {
+            background-color: #26b7ec;
+            transition: all 0.3s;
+        }
+    }
+}
+
+
+/* --------------------- TABLET and MOBILE------------------------ */
+
+@include MaxSizeDevice(1024px) {
+    .register {
+        &__container::after {
+            left: 108%;
+        }
+        &__item {
+            @include setPadMar1(6px, 6px);
+            label {
+                margin-bottom: 6px;
+            }
+            input {
+                font-size: 14px;
+            }
+        }
+        &__btn-item {
+            @include setPadMar1(14px, 6px);
+            font-size: 14px;
+        }
+        &__reCaptcha {
+            transform: scale(0.85);
+        }
+        &__note-bottom {
+            font-size: 14px;
+        }
+    }
+    .choice {
+        width: 70%;
+    }
+}
+
+
+/* --------------------- TABLET ------------------------ */
+
+@include MaxMinSizeDevice( 1024px, 768px) {
+    .register {
+        width: 60%;
+        padding: 16px 80px 8px 32px;
+        &__reCaptcha {
+            left: 88%;
+            transform: scale(0.55);
+        }
+    }
+    .choice {
+        width: 80%;
+        .title__choice {
+            font-size: 24px;
+        }
+    }
+}
+
+
+/* --------------------- MOBILE ------------------------ */
+
+@include MaxSizeDevice( 667px) {
+    .register {
+        &__wrap {
+            display: flex;
+            flex-direction: column;
+        }
+        &__container::after {
+            bottom: 22%;
+            left: 109%;
+        }
+        &reCaptcha {
+            left: 80%;
+            transform: scale(0.6);
+        }
+    }
+    .choice {
+        width: 90%;
+        padding-top: 48px;
+        .title__choice {
+            font-size: 24px;
+        }
+    }
+}
+
+@include MaxMinSizeDevice(767px, 425px) {
+    .register {
+        width: 75%;
+        padding: 16px 80px 8px 32px;
+    }
+    .choice {
+        width: 90%;
+        .title__choice {
+            font-size: 24px;
+        }
+    }
+}
+
+@include MaxSizeDevice(525px) {
+    .register {
+        width: 80%;
+        padding: 16px 36px 8px 16px;
+        &__container::after {
+            width: 2px;
+            left: 104%;
+        }
+        &__reCaptcha {
+            left: 80%;
+            transform: scale(0.45);
+        }
+    }
+    .title__choice {
+        font-size: 20px;
+    }
+    .choice__signin {
+        padding: 16px 74px;
+    }
+}
+
+
+/* ======================= END STYLE LOGIN FORM ==============================*/
