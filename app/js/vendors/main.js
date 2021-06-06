@@ -2,7 +2,7 @@ var register = document.querySelector('.register');
 var login = document.querySelector('.login');
 var choice = document.querySelector('.choice');
 var bar = document.querySelector('.bar__content');
-
+var input = [document.querySelectorAll('.login__item input')];
 
 function showRegister() {
     if (register.style.display !== "block") {
@@ -32,4 +32,8 @@ function showBarBtn() {
     if (bar.style.left !== "0px")
         bar.style.left = "0px";
     else bar.style.left = "-300px";
+}
+
+function showLabel {
+
 }
