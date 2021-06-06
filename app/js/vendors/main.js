@@ -33,7 +33,3 @@ function showBarBtn() {
         bar.style.left = "0px";
     else bar.style.left = "-300px";
 }
-
-function showLabel {
-
-}

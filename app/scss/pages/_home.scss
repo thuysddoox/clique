@@ -35,6 +35,8 @@
     }
     &__body {
         background-color: white;
+        margin: 0 auto;
+        width:100%;
     }
 }
 
@@ -138,10 +140,12 @@
 
 // post
 .post {
+    
     &__list {
         column-count: 5;
         column-gap: 16px;
         margin: 10px 16px;
+      
     }
     &__item {
         color: #C0C9D5;
@@ -236,6 +240,7 @@
 @include MaxMinSizeDevice(1200px, 1024px) {
     .post__list {
         column-count: 4;
+        
     }
 }
 
@@ -245,7 +250,9 @@
     }
     .post__list {
         column-count: 3;
-    }
+    
+        }
+  
 }
 
 
