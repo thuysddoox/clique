@@ -3,7 +3,7 @@
 #RegisterPage,
 #InitPage {
     @include setBackground($background-color, $background-image, cover, no-repeat, top left, fixed);
-    box-shadow: $bkShadow1, $bkShadow2;
+    // box-shadow: $bkShadow1, $bkShadow2;
     html {
         box-shadow: $bkShadow1, $bkShadow2;
     }

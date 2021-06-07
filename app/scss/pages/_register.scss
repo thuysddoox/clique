@@ -34,6 +34,7 @@
     // item in form register
     &__item {
         @include setPadMar1(8px, 6px);
+        position: relative;
         background-color: white;
         border-radius: 3px;
         // set width 100% with 1 columns for item 11th
@@ -69,6 +70,10 @@
             margin-top: 6px;
             display: none;
             background-color: transparent;
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            font-weight: bold;
         }
     }
     // button in register form

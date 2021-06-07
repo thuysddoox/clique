@@ -21,10 +21,13 @@ function User(name, contact, phone, email, password, re_password, web, ins, face
     this.face = face;
 }
 // change style label when enter input login and register
+register_label.forEach(initLabelRegister);
 
 function initLabelRegister(ob, id) {
     if (register_input[id].value.replace(' ', '').length == 0)
         ob.classList.remove('active');
+    else if (!ob.classList.contains('active')) ob.classList.add('active');
+
 }
 
 function initLabelLogin(ob, id) {
@@ -35,6 +38,7 @@ function initLabelLogin(ob, id) {
 
 function animationLabelLogin(ob, index) {
     ob.onfocus = () => {
+
         login_label.forEach(initLabelLogin);
         login_label[index].classList.add('active');
     }
@@ -42,7 +46,7 @@ function animationLabelLogin(ob, index) {
 
 function animationLabelRegister(ob, index) {
     ob.onfocus = () => {
-        register_span[index].style = 'none';
+        register_span[index].style.display = 'none';
         register_label.forEach(initLabelRegister);
         register_label[index].classList.add('active');
     }
@@ -76,7 +80,7 @@ document.querySelector('.register .btn--green').onclick =
             let sp = document.getElementsByClassName('name-note')[0]
             sp.innerText = '*This field is required';
             sp.style.display = 'block';
-        } else if (!namePatt.test(user.name)) {
+        } else if (namePatt.test(user.name)) {
             let sp = document.getElementsByClassName('name-note')[0];
             sp.innerText = '*Invalid name talent';
             sp.style.display = 'block';
@@ -86,7 +90,7 @@ document.querySelector('.register .btn--green').onclick =
             let sp = document.getElementsByClassName('contact-note')[0];
             sp.innerText = '*This field is required'
             sp.style.display = 'block';
-        } else if (!contactPatt.test(user.contact)) {
+        } else if (contactPatt.test(user.contact)) {
             let sp = document.getElementsByClassName('contact-note')[0];
             sp.innerText = '*Invalid contact';
             sp.style.display = 'block';
@@ -134,7 +138,7 @@ document.querySelector('.register .btn--green').onclick =
         // web
         if (user.web.length == 0) {
             let sp = document.getElementsByClassName('web-note')[0];
-            sp.innerText = '*This field is required'
+            sp.innerText = '*This field is required';
             sp.style.display = 'block';
         }
         // face
@@ -157,6 +161,11 @@ document.querySelector('.register .btn--green').onclick =
         }
 
     }
+
+// validate form
+function validateLogin() {
+
+}
 
 function showRegister() {
     if (register.style.display !== "block") {
