@@ -235,6 +235,11 @@
             left: 80%;
             transform: scale(0.6);
         }
+        &__item {
+            label {
+                transform: translateY(0%);
+            }
+        }
     }
     .choice {
         width: 90%;
@@ -249,6 +254,11 @@
     .register {
         width: 75%;
         padding: 16px 80px 8px 32px;
+        &__item {
+            label {
+                transform: translateY(0%);
+            }
+        }
     }
     .choice {
         width: 90%;
