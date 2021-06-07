@@ -63,6 +63,13 @@
         textarea {
             font-size: 14px;
         }
+        span {
+            color: $primary-color;
+            font-size: 12px;
+            margin-top: 6px;
+            display: none;
+            background-color: transparent;
+        }
     }
     // button in register form
     &__btn {
@@ -176,7 +183,7 @@
         &__item {
             @include setPadMar1(6px, 6px);
             label {
-                // margin-bottom: 6px;
+                transform: translateY(-50%);
             }
             input {
                 font-size: 14px;
@@ -237,7 +244,7 @@
         }
         &__item {
             label {
-                transform: translateY(0%);
+                transform: translateY(50%);
             }
         }
     }
@@ -256,7 +263,7 @@
         padding: 16px 80px 8px 32px;
         &__item {
             label {
-                transform: translateY(0%);
+                transform: translateY(50%);
             }
         }
     }
@@ -264,6 +271,16 @@
         width: 90%;
         .title__choice {
             font-size: 24px;
+        }
+    }
+}
+
+@include MaxMinSizeDevice( 767px, 666px) {
+    .register {
+        &__item {
+            label {
+                transform: translateY(-50%);
+            }
         }
     }
 }
