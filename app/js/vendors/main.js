@@ -7,6 +7,7 @@ var register_label = [...document.querySelectorAll('.register__item label')];
 var login_input = [...document.querySelectorAll('.login__input input')];
 var register_input = [...document.querySelectorAll('.register__item input'), ...document.querySelectorAll('.register__item textarea')];
 var register_span = [...document.querySelectorAll('.register__item span')];
+var login_span = [...document.querySelectorAll('.login__item span')];
 // constructor function for user
 function User(name, contact, phone, email, password, re_password, web, ins, face, twitter) {
     this.name = name;
@@ -38,7 +39,7 @@ function initLabelLogin(ob, id) {
 
 function animationLabelLogin(ob, index) {
     ob.onfocus = () => {
-
+        login_span[index].style.display = 'none';
         login_label.forEach(initLabelLogin);
         login_label[index].classList.add('active');
     }
@@ -55,7 +56,8 @@ login_input.forEach(animationLabelLogin);
 register_input.forEach(animationLabelRegister);
 
 // Validation register form
-document.querySelector('.register .btn--green').onclick =
+var register_btn = document.querySelector('.register .btn--green');
+if (register_btn) register_btn.onclick =
     function validateRegister() {
         let user = new User(
             document.getElementById('name').value,
@@ -163,9 +165,24 @@ document.querySelector('.register .btn--green').onclick =
     }
 
 // validate form
-function validateLogin() {
-
-}
+var login_btn = document.querySelector('.login .btn--green');
+if (login_btn) login_btn.onclick =
+    function validateLogin() {
+        let mailPatt = /^[a-zA-Z]+\d+@gmail.com$/gi;
+        let mail = document.querySelector('.login__item #email').value,
+            pass = document.querySelector('.login__item #pass').value;
+        let span_mail = document.querySelector('.login__input .email-note'),
+            span_pass = document.querySelector('.login__input .pass-note');
+        if (mail.length == 0) {
+            span_mail.innerText = '*This field is required';
+        } else if (!mailPatt.test(mail)) {
+            span_mail.innerText = "*Invalid email";
+        }
+        console.log(pass)
+        if (pass.length == 0) {
+            span_pass.innerText = "*This field is required";
+        }
+    }
 
 function showRegister() {
     if (register.style.display !== "block") {

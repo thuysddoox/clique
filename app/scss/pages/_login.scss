@@ -39,6 +39,12 @@
             color: white;
         }
     }
+    &__input {
+        span {
+            color: $primary-color;
+            font-size: 14px;
+        }
+    }
     &__item {
         background-color: white;
         border-radius: 3px;
