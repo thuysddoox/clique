@@ -2,7 +2,32 @@ var register = document.querySelector('.register');
 var login = document.querySelector('.login');
 var choice = document.querySelector('.choice');
 var bar = document.querySelector('.bar__content');
-var input = [document.querySelectorAll('.login__item input')];
+var login_label = [...document.querySelectorAll('.login__input label')];
+var register_label = [...document.querySelectorAll('.register__item label')];
+var login_input = [...document.querySelectorAll('.login__input input')];
+var register_input = [...document.querySelectorAll('.register__item input')];
+
+// change style label when enter input login and register
+
+function initLabel(ob) {
+    ob.classList.remove('active');
+}
+
+function animationLabelLogin(ob, index) {
+    ob.onfocus = () => {
+        login_label.forEach(initLabel);
+        login_label[index].classList.add('active');
+    }
+}
+
+function animationLabelRegister(ob, index) {
+    ob.onfocus = () => {
+        register_label.forEach(initLabel);
+        register_label[index].classList.add('active');
+    }
+}
+login_input.forEach(animationLabelLogin);
+register_input.forEach(animationLabelRegister);
 
 function showRegister() {
     if (register.style.display !== "block") {

@@ -46,22 +46,20 @@
         input {
             font-size: 16px;
             color: $textColor-main-Input;
-            padding: 6px;
         }
         &.btn--green {
             @extend %btn--green;
             padding: 12px;
         }
         label {
-            display: none;
-            font-size: 12px;
-        }
-        & .active {
-            label {
-                display: block;
-            }
-            input {
-                padding: 0px;
+            @include position(relative, 0%, 0%, 0%, 0%, 0, 50%);
+            font-size: $fontSize-main;
+            display: block;
+            line-height: 20px;
+            transition: all 0.3s;
+            &.active {
+                @include position(relative, 0%, 0%, 0%, 0%, 0, 0%);
+                font-size: $font-small;
             }
         }
     }
