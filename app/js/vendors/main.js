@@ -34,7 +34,7 @@ function initLabelRegister(ob, id) {
 function initLabelLogin(ob, id) {
     if (login_input[id].value.replace(' ', '').length == 0)
         ob.classList.remove('active');
-
+    else if (!ob.classList.contains('active')) ob.classList.add('active');
 }
 
 function animationLabelLogin(ob, index) {
@@ -45,6 +45,13 @@ function animationLabelLogin(ob, index) {
     }
 }
 
+function focusoutLabelLogin(ob, index) {
+    ob.addEventListener("focusout", () => {
+        console.log('helo');
+        login_label.forEach(initLabelLogin);
+    })
+}
+
 function animationLabelRegister(ob, index) {
     ob.onfocus = () => {
         register_span[index].style.display = 'none';
@@ -52,9 +59,16 @@ function animationLabelRegister(ob, index) {
         register_label[index].classList.add('active');
     }
 }
+
+function focusoutLabelRegister(ob, index) {
+    ob.addEventListener("focusout", () => {
+        register_label.forEach(initLabelRegister);
+    });
+}
 login_input.forEach(animationLabelLogin);
 register_input.forEach(animationLabelRegister);
-
+login_input.forEach(focusoutLabelLogin);
+register_input.forEach(focusoutLabelRegister);
 // Validation register form
 var register_btn = document.querySelector('.register .btn--green');
 if (register_btn) register_btn.onclick =
@@ -168,20 +182,28 @@ if (register_btn) register_btn.onclick =
 var login_btn = document.querySelector('.login .btn--green');
 if (login_btn) login_btn.onclick =
     function validateLogin() {
+        let kt = true;
         let mailPatt = /^[a-zA-Z]+\d+@gmail.com$/gi;
         let mail = document.querySelector('.login__item #email').value,
             pass = document.querySelector('.login__item #pass').value;
         let span_mail = document.querySelector('.login__input .email-note'),
             span_pass = document.querySelector('.login__input .pass-note');
+        document.querySelector('.login__wrap .login_note').style.display = "none";
         if (mail.length == 0) {
             span_mail.innerText = '*This field is required';
+            span_mail.style.display = "inline-block";
+            kt = false;
         } else if (!mailPatt.test(mail)) {
             span_mail.innerText = "*Invalid email";
+            kt = false;
+            span_mail.style.display = "inline-block";
         }
-        console.log(pass)
         if (pass.length == 0) {
             span_pass.innerText = "*This field is required";
+            kt = false;
+            span_pass.style.display = "inline-block";
         }
+        if (kt == true) document.querySelector('.login__wrap .login_note').style.display = "block";
     }
 
 function showRegister() {
