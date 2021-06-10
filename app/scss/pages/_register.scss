@@ -42,6 +42,9 @@
             height: auto;
             grid-column: 1 / 3;
         }
+        .error{
+            border: 1px solid $primary-color;
+        }
         label {
             @include position(relative, 50%, none, none, none, 0, -50%);
             display: block;
