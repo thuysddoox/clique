@@ -791,6 +791,11 @@ navbar_item.forEach(function(item) {
         item.onclick = () => {
             let options = [item.innerText];
             filterByType(options);
+            navbar_item.forEach(item => {
+                if (item.classList.contains('active-navbar'))
+                    item.classList.remove('active-navbar');
+            });
+            item.classList.toggle('active-navbar');
         }
     }
 });
@@ -840,8 +845,10 @@ function filterByType(option) {
         posts.forEach(post => post.style.display = 'none');
         option.forEach((op) => {
             posts.forEach((item) => {
-                if (item.querySelector('.post__item-type').innerText.toLowerCase().localeCompare(op.toLowerCase()) == 0) { item.style.display = 'inline-block';
-                    kt = true; }
+                if (item.querySelector('.post__item-type').innerText.toLowerCase().localeCompare(op.toLowerCase()) == 0) {
+                    item.style.display = 'inline-block';
+                    kt = true;
+                }
             });
         })
         if (kt == false) document.querySelector('.noPost').style.display = 'block';

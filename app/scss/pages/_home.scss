@@ -27,7 +27,8 @@
             color: #536876;
             font-size: $fontSize-main;
             font-weight: bold;
-            &:hover {
+            &:hover,
+            &.active-navbar {
                 color: #E60A17;
                 transition: all 0.3s;
             }
