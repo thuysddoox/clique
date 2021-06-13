@@ -730,6 +730,7 @@ if (document.querySelector('.post__list'))
             document.querySelector('.loader').style.display = 'block';
             setTimeout(getPosts, 2000);
             loadedCount++;
+
         }
     }
 
@@ -746,6 +747,7 @@ function getPosts() {
     document.querySelector('.loader').style.display = 'none';
     postList.insertAdjacentHTML('beforeend', htmls);
     postAction();
+    filterType();
 }
 
 function renderPost(post) {
@@ -778,6 +780,74 @@ function renderPost(post) {
     </div>
 </div>`;
     return html;
+}
+
+/* ============== Filter post by type ============== */
+
+var filterBtn = document.querySelector('.filterBtn');
+var navbar_item = [...document.querySelectorAll('.home__navbar-list .home__navbar-item')];
+navbar_item.forEach(function(item) {
+    if (item != null) {
+        item.onclick = () => {
+            let options = [item.innerText];
+            filterByType(options);
+        }
+    }
+});
+if (filterBtn != null) {
+    filterBtn.addEventListener('click', () => {
+        filterType();
+        showFilter();
+    });
+}
+
+function filterType() {
+    let options = getFilter();
+    // console.log(options)
+    filterByType(options);
+
+}
+// Show filter options
+function showFilter() {
+    let filter = document.querySelector('.filterByType');
+    if (filter.style.display != 'grid') {
+        filter.style.display = 'grid';
+    } else filter.style.display = 'none';
+    document.querySelector('.header__icon--filter i').classList.toggle('active-icon');
+}
+
+// Get options filter
+function getFilter() {
+    let input = [...document.querySelectorAll('.filterByType__item input')];
+    let check, rs;
+    if (document.querySelector('.filterByType__item #All').checked) {
+        rs = input.forEach(item => item.id);
+    } else {
+        check = input.filter((item) => {
+            return item.checked;
+        });
+        rs = check.map(item => item.id);
+    }
+
+    // if (rs.length < input.length) document.querySelector('.filterByType__item #All').checked = false;
+    return rs;
+}
+
+function filterByType(option) {
+    let posts = [...document.querySelectorAll('.post__item')];
+    let kt = false;
+    if (option.length > 0) {
+        posts.forEach(post => post.style.display = 'none');
+        option.forEach((op) => {
+            posts.forEach((item) => {
+                if (item.querySelector('.post__item-type').innerText.toLowerCase().localeCompare(op.toLowerCase()) == 0) { item.style.display = 'inline-block';
+                    kt = true; }
+            });
+        })
+        if (kt == false) document.querySelector('.noPost').style.display = 'block';
+        else document.querySelector('.noPost').style.display = 'none';
+    } else posts.forEach(post => post.style.display = 'inline-block');
+
 }
 
 ////////////////////////

@@ -28,6 +28,7 @@
                     </div>
                     <div class="bar__content-item">
                         <i class="fas fa-filter"></i> <span>Filter</span>
+
                     </div>
                     <div class="bar__content-item">
                         <i class="fas fa-bell"></i> <span>Notification</span>
@@ -49,7 +50,66 @@
             <div class="header__other">
                 <div class="header__icon">
                     <div class="header__icon--filter header__icon--item">
-                        <i class="fas fa-filter"></i>
+                        <i class="fas fa-filter" onclick=showFilter()></i>
+                        <div class="filterByType">
+                            <div class="filterByType__item">
+                                <input type="checkbox" name="" id="News">
+                                <label for="News">News</label>
+                            </div>
+                            <div class="filterByType__item">
+                                <input type="checkbox" name="" id="Events">
+                                <label for="Events">Events</label>
+                            </div>
+                            <div class="filterByType__item">
+                                <input type="checkbox" name="" id="Status">
+                                <label for="Status">Status</label>
+                            </div>
+                            <div class="filterByType__item">
+                                <input type="checkbox" name="" id="Video">
+                                <label for="Video">Video</label>
+                            </div>
+                            <div class="filterByType__item">
+                                <input type="checkbox" name="" id="Photo">
+                                <label for="Photo">Photo</label>
+                            </div>
+                            <div class="filterByType__item">
+                                <input type="checkbox" name="" id="Results">
+                                <label for="Results">Results</label>
+                            </div>
+                            <div class="filterByType__item">
+                                <input type="checkbox" name="" id="Poll">
+                                <label for="Poll">Poll</label>
+                            </div>
+                            <div class="filterByType__item">
+                                <input type="checkbox" name="" id="Music">
+                                <label for="Music">Music</label>
+                            </div>
+                            <div class="filterByType__item">
+                                <input type="checkbox" name="" id="Media">
+                                <label for="Media">Media</label>
+                            </div>
+                            <div class="filterByType__item">
+                                <input type="checkbox" name="" id="Shop">
+                                <label for="Shop">Shop</label>
+                            </div>
+                            <div class="filterByType__item">
+                                <input type="checkbox" name="" id="Social">
+                                <label for="Social">Social</label>
+                            </div>
+                            <div class="filterByType__item">
+                                <input type="checkbox" name="" id="Forums">
+                                <label for="Forums">Forums</label>
+                            </div>
+                            <div class="filterByType__item">
+                                <input type="checkbox" name="" id="Schedule">
+                                <label for="Schedule">Schedule</label>
+                            </div>
+                            <div class="filterByType__item">
+                                <input type="checkbox" name="" id="All">
+                                <label for="All">All</label>
+                            </div>
+                            <button class="filterBtn">Done</button>
+                        </div>
                     </div>
                     <div class="header__icon--notify header__icon--item">
                         <i class="fas fa-bell"></i>
@@ -62,7 +122,7 @@
                     <div class="header__user--avatar">
                         <img src="assets/images/avatar.png" alt="">
                     </div>
-                    <div class="header__user--down"><i class="fas fa-sort-down"></i></div>
+                    <div class="header__user--down header__icon--item"><i class="fas fa-sort-down"></i></div>
                 </div>
             </div>
         </div>
@@ -351,6 +411,8 @@
                 </div>
             </div>
         </div>
+
+        <h2 class="noPost">No posts</h2>
 
     </div>
     <div class="loader">

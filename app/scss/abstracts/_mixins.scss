@@ -89,3 +89,16 @@
         }
     }
 }
+
+@mixin slidedown() {
+    @keyframes slidedown {
+        from {
+            transform: scale(0.8) translateX(-50%);
+            opacity: 0.6;
+        }
+        to {
+            transform: scale(1) translateX(-50%);
+            opacity: 1;
+        }
+    }
+}

@@ -40,6 +40,14 @@
     }
 }
 
+.noPost {
+    display: none;
+    color: rgba(132, 131, 131, 0.4);
+    text-align: center;
+    margin-top: 56px;
+    font-size: 32px;
+}
+
 // header
 .header {
     &__search {
@@ -67,9 +75,10 @@
         color: $textColor-header-home;
         margin-right: 24px;
         &--item {
-            margin: 0px 24px;
+            padding: 16px 24px;
             @extend %pointer;
-            &:hover {
+            & i:hover,
+            .active-icon {
                 color: #E60A17;
                 transition: 0.3s all;
             }
@@ -133,6 +142,56 @@
             i {
                 display: inline-block;
                 padding: 8px;
+            }
+        }
+    }
+}
+
+// filter 
+.header__icon--filter {
+    position: relative;
+    .filterByType {
+        @include slidedown();
+        @include grid2Col();
+        @include position(absolute, calc(100% + 17px), none, none, 50%, -50%, 0);
+        display: none;
+        min-width: 400px;
+        padding: 16px 48px;
+        background-color: white;
+        box-shadow: 0px 1px 3px rgb(76, 75, 75);
+        animation: slidedown 0.3s linear 1;
+        transform-origin: top left;
+        &::before {
+            @include position(absolute, -16px, none, none, 50%, -50%, 0);
+            content: '';
+            width: 0;
+            height: 0;
+            border: 8px solid;
+            border-color: transparent transparent $primary-color transparent;
+        }
+        &__item {
+            padding: 8px;
+            margin-left: 40px;
+            label {
+                display: inline-block;
+                padding: 8px;
+            }
+        }
+        .filterBtn {
+            @extend %pointer;
+            display: block;
+            color: white;
+            margin: 16px 0px;
+            border-radius: 5px;
+            background-color: $primary-color;
+            padding: 10px 0px;
+            width: 100%;
+            text-align: center;
+            font-size: $fontSize-main;
+            grid-column: 1 / 3;
+            &:hover {
+                background-color: #0a66e6;
+                transition: all 0.3s;
             }
         }
     }
