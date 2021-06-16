@@ -12,28 +12,112 @@ var register_span = [...document.querySelectorAll('.register__item span')];
 var login_span = [...document.querySelectorAll('.login__item span')];
 var submitRegister = false;
 var submitLogin = false;
+const urlUsers = 'https://test.cliquefan.com/api/portal/app/login';
+const urlPosts = 'https://test.cliquefan.com/api/portal/fan/home?status=1&pageSize=50&pageIndex=0';
+const urlFavorited = "https://test.cliquefan.com/api/portal/news/reaction/love/";
+const urlUnFavorited = "https://test.cliquefan.com/api/portal/news/unreaction/love/";
+var userCurrent;
 // constructor function for user
-function User(name, contact, phone, email, password, re_password, web, ins, face, twitter) {
-    this.name = name;
-    this.contact = contact;
-    this.phone = phone;
-    this.email = email;
-    this.password = password;
-    this.re_password = re_password;
-    this.web = web;
-    this.ins = ins;
-    this.twitter = twitter;
-    this.face = face;
-}
+// function User(name, contact, phone, email, username, password, web, ins, face, twitter, avatar) {
+//     this.name = name;
+//     this.contact = contact;
+//     this.phone = phone;
+//     this.email = email;
+//     this.username = username;
+//     this.password = password;
+//     this.web = web;
+//     this.insagram = ins;
+//     this.twitter = twitter;
+//     this.facebook = face;
+//     this.createdAt = new Date.now();
+//     this.avatar = avatar;
+// }
 // active comment and heart
+function favorite(user, post) {
+    fetch(urlFavorited + post.id, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + user.access_token
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.responseData)
+                showSuccessHeart();
+            else showFailHeart()
+        })
+        .catch(err => {
+            console.log(err);
+            showFailHeart();
+        });
+}
+
+function unfavorite(user, post) {
+    fetch(urlUnFavorited + post.id, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + user.access_token
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.responseData)
+                showSuccessHeart();
+            else showFailHeart()
+        })
+        .catch(err => {
+            console.log(err);
+            showFailHeart();
+        });
+}
+
+function showFailHeart() {
+    let notify = document.querySelector('.postFail');
+
+    notify.style.display = 'block';
+    setTimeout(() => notify.style.display = 'none', 2500)
+}
+
+function showSuccessHeart() {
+    let notify = document.querySelector('.postSuccess');
+
+    notify.style.display = 'block';
+    setTimeout(() => notify.style.display = 'none', 2500)
+
+}
+
 function postAction() {
     var heart = document.querySelectorAll('.post__item-bottom--heart i');
     var heartnum = document.querySelectorAll('.post__item-bottom--heart .post__botton-item--number');
+    var post__item = [...document.querySelectorAll('.post__item')];
     heart.forEach(function(item, id) {
         item.onclick = () => {
+            let index = parseInt(post__item[id].id);
+            let user = JSON.parse(localStorage.getItem('user'));
             item.classList.toggle('heart-active');
-            if (!item.classList.contains('heart-active')) heartnum[id].innerText = parseInt(heartnum[id].innerText) - 1;
-            else heartnum[id].innerText = parseInt(heartnum[id].innerText) + 1;
+            if (!item.classList.contains('heart-active')) {
+                heartnum[id].innerText = parseInt(heartnum[id].innerText) - 1;
+                if (index) {
+                    unfavorite(user, posts[index]);
+
+                }
+            } else {
+                heartnum[id].innerText = parseInt(heartnum[id].innerText) + 1;
+                if (index) {
+                    favorite(user, posts[index]);
+                }
+            }
+            if (index) {
+                posts[index].totalEmotion.totalLove = parseInt(heartnum[id].innerText);
+                post__item.forEach((post, num) => {
+                    if (parseInt(post.id) === index && num != id) {
+                        heart[num].classList.toggle('heart-active');
+                        heartnum[num].innerText = posts[index].totalEmotion.totalLove;
+                    }
+                })
+            } else showFailHeart();
         }
     });
     var cmt = document.querySelectorAll('.post__item-bottom--comment i');
@@ -41,7 +125,6 @@ function postAction() {
     cmt.forEach(function(item, id) {
         {
             item.onclick = () => {
-
                 if (!item.classList.contains('cmt-active')) item.classList.toggle('cmt-active');
                 else cmtnum[id].innerText = parseInt(cmtnum[id].innerText) + 1;
             }
@@ -275,10 +358,12 @@ if (register_btn) register_btn.onclick =
         flag = validateIns(flag);
         flag = validateWeb(flag);
         flag = validateTwitter(flag);
-        if (flag == true) location.replace("../Login.html");
-
+        if (flag == true) {
+            location.replace("../Login.html");
+        }
     }
-    //validate when input changes
+
+//validate when input changes
 if (document.querySelector('.register') != null) {
     ['input', 'focusout'].forEach((event) => document.getElementById('name').addEventListener(event, function() {
         if (submitRegister) validateName(true);
@@ -316,7 +401,7 @@ if (document.querySelector('.register') != null) {
 // VALIDATE FORM LOGIN
 // validate email login
 function validateEmailLogin(flag) {
-    let mailPatt = /^[a-zA-Z]+\d*@gmail.com$/gi;
+    let mailPatt = /@gmail.com$/gi;
     let mail = document.querySelector('.login__item #email').value,
         span_mail = document.querySelector('.login__input .email-note');
     if (mail.length == 0) {
@@ -339,24 +424,110 @@ function validatePassLogin(flag) {
         span_pass.innerText = "*This field is required";
         flag = false;
         span_pass.style.display = "inline-block";
+    } else if (pass.length < 8) {
+        span_pass.innerText = "Invalid password";
+        flag = false;
+        span_pass.style.display = "inline-block";
     }
     if (flag == true) span_pass.style.display = "none";
     return flag;
 }
+
+
+
+function formatPost(posts) {
+    const type = ["News", "Events", "Status", "Video", "Photo", "Results", "Poll", "Music", "Media", "Shop", "Social", "Forums", "Schedule"];
+    posts.forEach(post => {
+        post.type = type[Math.floor(Math.random() * type.length)];
+    })
+}
+
+function submitUser(user) {
+    fetch(urlUsers, {
+            method: 'POST',
+            redirect: 'follow',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+        .then(response => response.json())
+        .then(data => {
+
+            if (data.responseData) {
+                localStorage.setItem('infoLogin', JSON.stringify(user));
+                redirectHomepage(data.responseData);
+            } else document.querySelector('.login__wrap .login_note').style.display = "block";
+        })
+        .catch(err => { console.log(err); })
+}
+
+function redirectHomepage(user) {
+    localStorage.setItem('login', true);
+    localStorage.setItem('user', JSON.stringify(user));
+    window.location.href = "../home.html";
+}
+
+function getPostFromDB(user) {
+    fetch(urlPosts, {
+            method: 'GET',
+            headers: {
+                'Authorization': 'bearer' + user.access_token,
+                'Content-Type': 'application/json'
+            }
+        }).then(function(response) {
+            if (response.ok) {
+                return response.json();
+            }
+        })
+        .then(data => posts = data.responseData.fanFeedResponses || [])
+        .catch(err => {
+            console.log(err);
+        })
+
+}
+// If user used to login successfully
+if (localStorage.getItem('login')) {
+    let info = JSON.parse(localStorage.getItem('infoLogin'));
+    if (document.querySelector('.login')) {
+        document.querySelector('.login__item #email').value = info.username;
+        document.querySelector('.login__item #pass').value = info.password;
+        login_label.forEach(item => item.classList.add('active'));
+        document.querySelector('.login__item.btn--green').classList.add('logined')
+    }
+} else
+    document.querySelector('.login__item.btn--green').classList.remove('logined')
+
+
 // click login
-var login_btn = document.querySelector('.login .btn--green');
+const login_btn = document.querySelector('.login .btn--green');
 if (login_btn) login_btn.onclick =
     function validateLogin() {
         let kt = true;
         submitLogin = true;
-        document.querySelector('.login__wrap .login_note').style.display = "none";
+        let mess = document.querySelector('.login__wrap .login_note');
+        let mail = document.querySelector('.login__item #email').value,
+            pass = document.querySelector('.login__item #pass').value;
+        mess.style.display = "none";
         kt = validateEmailLogin(kt);
         kt = validatePassLogin(kt);
-        if (kt == true) document.querySelector('.login__wrap .login_note').style.display = "block";
-        if (kt == true) location.replace("../home.html");
-
+        if (kt == true) {
+            let info = {
+                password: pass,
+                username: mail
+            };
+            submitUser(info);
+        }
     }
-    // validate when input login change
+    // When login successfully change username and get Listpost from api
+
+if (localStorage.getItem('login')) {
+    let user = JSON.parse(localStorage.getItem('user'));
+    if (document.querySelector('.header__user--name'))
+        document.querySelector('.header__user--name').innerText = user.ekoUser.displayName || 'Username';
+    getPostFromDB(user);
+}
+// validate when input login change
 if (document.querySelector('.login') != null) {
     ['input', 'focusout'].forEach((event) => document.getElementById('email').addEventListener(event, function() {
         if (submitLogin) validateEmailLogin(true);
@@ -365,360 +536,11 @@ if (document.querySelector('.login') != null) {
         if (submitLogin) validatePassLogin(true);
     }));
 }
-// document.getElementById('email').oninput = function() {
-//     // if (submitLogin) validateEmailLogin(true);
-//     console.log('hheh');
-// };
+
 
 
 /* ======================== LOADING PAGE ==================== */
-var posts = [{
-        description: "Motorists should avoid the area around Forelock and East Lake roads in Pinellas County until Thursday morning.",
-        eventTime: 1614767700000,
-        imageUrl: "assets/images/post10.png",
-        link: "https://www.tampabay.com/news/breaking-news/2021/02/17/traffic-crash-involving-pinellas-sheriffs-deputy-closes-east-lake-road/",
-        favorited: true,
-        totalHeart: 50,
-        totalComment: 0,
-        channel: 'LEWIS HAMILTOn',
-        type: 'video'
-    }, {
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, Forelock and East Lake roads in Pinellas County until Thursday morning.",
-        eventTime: 1614732700000,
-        imageUrl: "assets/images/post10.png",
-        link: "",
-        favorited: false,
-        totalHeart: 50,
-        channel: 'LEWIS HAMILTOn',
-        totalComment: 10,
-        type: 'video'
-    }, {
-        description: "Motorists should avoid the area around Forelock and East Lake roads in Pinellas County until Thursday morning.",
-        eventTime: 1614761200000,
-        imageUrl: "assets/images/post1.png",
-        link: "",
-        favorited: false,
-        totalHeart: 50,
-        channel: 'LEWIS HAMILTOn',
-        totalComment: 0,
-        type: 'video'
-    }, {
-        description: "Motorists should avoid the area around Forelock, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        eventTime: 1614227700000,
-        imageUrl: "",
-        link: "",
-        favorited: true,
-        totalHeart: 23,
-        channel: 'LEWIS HAMILTOn',
-        totalComment: 5,
-        type: 'video'
-    }, {
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        eventTime: 1621767700000,
-        imageUrl: "assets/images/post8.png",
-        link: "",
-        favorited: false,
-        totalHeart: 90,
-        channel: 'LEW STATE',
-        totalComment: 0,
-        type: 'Photo'
-    }, {
-        description: " East Lake roads in Pinellas County until Thursday morning.",
-        eventTime: 1616667700000,
-        imageUrl: "assets/images/post7.png",
-        link: "",
-        favorited: true,
-        channel: 'LEWIS HAMILTOn',
-        totalHeart: 80,
-        totalComment: 27,
-        type: 'News'
-    }, {
-        description: "Motorists should avoid the area around Forelock",
-        eventTime: 1614767890000,
-        imageUrl: "assets/images/post8.png",
-        link: "",
-        favorited: true,
-        totalHeart: 334,
-        channel: ' STATE IN AMILTOn',
-        totalComment: 30,
-        type: 'video'
-    }, {
-        description: "Forelock and East Lake roads in Pinellas County until Thursday morning.",
-        eventTime: 1614766780000,
-        imageUrl: "assets/images/post2.png",
-        link: "",
-        favorited: true,
-        channel: ' STATE OF ORGIINILTOn',
-        totalHeart: 34,
-        totalComment: 23,
-        type: 'Photo'
-    }, {
-        description: "Motorists should avoid the area around Forelock and East Lake roads in Pinellas County until Thursday morning.",
-        eventTime: 1614768800000,
-        imageUrl: "assets/images/post5.png",
-        link: "",
-        favorited: true,
-        totalHeart: 50,
-        channel: 'LEWIS STATE OF ORGIIN',
-        totalComment: 0,
-        type: 'video'
-    }, {
-        description: "Motorists should avoid the area around Forelock and East Lake roads in Pinellas County until Thursday morning.",
-        eventTime: 1614767799999,
-        imageUrl: "assets/images/post10.png",
-        link: "",
-        favorited: false,
-        totalHeart: 150,
-        channel: ' ORGIIN',
-        totalComment: 10,
-        type: 'status'
-    }, {
-        description: "East Lake roads in Pinellas County until Thursday morning.",
-        eventTime: 1614767990000,
-        imageUrl: "",
-        link: "",
-        favorited: true,
-        totalHeart: 30,
-        channel: ' STATE OF ORGIIN',
-        totalComment: 20,
-        type: 'video'
-    }, {
-        description: "Forelock and East Lake roads in Pinellas County until Thursday morning.",
-        eventTime: 1614769900000,
-        imageUrl: "assets/images/post1.png",
-        link: "",
-        channel: 'LEWITOn',
-        favorited: false,
-        totalHeart: 110,
-        totalComment: 19,
-        type: 'Status'
-    },
-    {
-        description: "dolor sit amet consectetur adipiscing elit Forelock and East Lake roads in Pinellas County until Thursday morning.",
-        eventTime: 1614769900000,
-        imageUrl: "assets/images/post10.png",
-        link: "",
-        favorited: false,
-        totalHeart: 50,
-        channel: 'LEWILTOn',
-        totalComment: 10,
-        type: 'video'
-    }, {
-        description: "Motorists should avoid the area around Forelock and East Lake roads in Pinellas County until Thursday morning.",
-        eventTime: 1614767700000,
-        imageUrl: "assets/images/post1.png",
-        link: "",
-        favorited: false,
-        totalHeart: 50,
-        channel: 'MILTOn',
-        totalComment: 0,
-        type: 'video'
-    }, {
-        description: "Motorists should avoid the area around Forelock, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        eventTime: 1614767700000,
-        imageUrl: "",
-        link: "",
-        favorited: true,
-        totalHeart: 23,
-        channel: 'AMILTOn',
-        totalComment: 5,
-        type: 'video'
-    }, {
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        eventTime: 1614887700000,
-        imageUrl: "",
-        link: "",
-        favorited: false,
-        totalHeart: 90,
-        channel: 'LEWOn',
-        totalComment: 0,
-        type: 'Photo'
-    }, {
-        description: " East Lake roads in Pinellas County until Thursday morning.",
-        eventTime: 1619997700000,
-        imageUrl: "assets/images/post7.png",
-        link: "",
-        favorited: true,
-        totalHeart: 80,
-        channel: 'LEEPLTOn',
-        totalComment: 27,
-        type: 'News'
-    }, {
-        description: "Motorists should avoid the area around Forelock",
-        eventTime: 1621167700000,
-        imageUrl: "",
-        link: "",
-        favorited: true,
-        totalHeart: 334,
-        totalComment: 30,
-        channel: 'LEWIOn',
-        type: 'video'
-    }, {
-        description: "Forelock and East Lake roads in Pinellas County until Thursday morning.",
-        eventTime: 1619876700000,
-        imageUrl: "assets/images/post2.png",
-        link: "",
-        favorited: true,
-        totalHeart: 34,
-        channel: 'LEWLTOn',
-        totalComment: 23,
-        type: 'Photo'
-    }, {
-        description: "Motorists should avoid the area around Forelock and East Lake roads in Pinellas County until Thursday morning.",
-        eventTime: 1614774600000,
-        imageUrl: "assets/images/post5.png",
-        link: "",
-        favorited: true,
-        totalHeart: 50,
-        channel: 'LEWIS EPL',
-        totalComment: 0,
-        type: 'video'
-    }, {
-        description: "Motorists should avoid the area around Forelock and East Lake roads in Pinellas County until Thursday morning.",
-        eventTime: 1614777700000,
-        imageUrl: "assets/images/post10.png",
-        link: "",
-        favorited: false,
-        totalHeart: 150,
-        channel: 'EPL',
-        totalComment: 10,
-        type: 'status'
-    }, {
-        description: "East Lake roads in Pinellas County until Thursday morning.",
-        eventTime: 1614765700000,
-        imageUrl: "",
-        link: "",
-        favorited: true,
-        totalHeart: 30,
-        channel: 'EPL HAMILTOn',
-        totalComment: 20,
-        type: 'video'
-    },
-    {
-        description: "Forelock and East Lake roads in Pinellas County until Thursday morning.",
-        eventTime: 1614367700000,
-        imageUrl: "assets/images/post1.png",
-        link: "",
-        favorited: false,
-        totalHeart: 501,
-        channel: 'EPLHAMILTOn',
-        totalComment: 10,
-        type: 'Photo'
-    },
-    {
-        description: "dolor sit amet,consectetur adipiscing elit, Forelock and East Lake roads in Pinellas County until Thursday morning.",
-        eventTime: 1612367700000,
-        imageUrl: "assets/images/post10.png",
-        link: "",
-        favorited: false,
-        totalHeart: 50,
-        channel: 'LEWIS EPL ',
-        totalComment: 10,
-        type: 'video'
-    }, {
-        description: "Motorists should avoid the area around Forelock and East Lake roads in Pinellas County until Thursday morning.",
-        eventTime: 1621767700000,
-        imageUrl: "assets/images/post1.png",
-        link: "",
-        favorited: false,
-        totalHeart: 50,
-        channel: 'STEELERS',
-        totalComment: 0,
-        type: 'video'
-    }, {
-        description: "Motorists should avoid the area around Forelock, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        eventTime: 1619767700000,
-        imageUrl: "",
-        link: "",
-        favorited: true,
-        totalHeart: 23,
-        channel: 'PITTSBURGH STEELERS',
-        totalComment: 5,
-        type: 'video'
-    }, {
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        eventTime: 1614799700000,
-        imageUrl: "assets/images/post8.png",
-        link: "",
-        favorited: false,
-        totalHeart: 90,
-        channel: 'LEWIS',
-        totalComment: 0,
-        type: 'Photo'
-    }, {
-        description: " East Lake roads in Pinellas County until Thursday morning.",
-        eventTime: 1614767745000,
-        imageUrl: "assets/images/post7.png",
-        link: "",
-        favorited: true,
-        totalHeart: 80,
-        channel: ' PITTSBURGH',
-        totalComment: 27,
-        type: 'News'
-    }, {
-        description: "Motorists should avoid the area around Forelock",
-        eventTime: 1610667700000,
-        imageUrl: "assets/images/post8.png",
-        link: "",
-        favorited: true,
-        totalHeart: 334,
-        channel: 'HAMILTOn',
-        totalComment: 30,
-        type: 'video'
-    }, {
-        description: "Forelock and East Lake roads in Pinellas County until Thursday morning.",
-        eventTime: 1619767700000,
-        imageUrl: "assets/images/post2.png",
-        link: "",
-        favorited: true,
-        totalHeart: 34,
-        channel: ' PITTSBURGH',
-        totalComment: 23,
-        type: 'Photo'
-    }, {
-        description: "Motorists should avoid the area around Forelock and East Lake roads in Pinellas County until Thursday morning.",
-        eventTime: 1626767700000,
-        imageUrl: "assets/images/post5.png",
-        link: "",
-        favorited: true,
-        totalHeart: 50,
-        channel: 'HAMILTOn',
-        totalComment: 0,
-        type: 'video'
-    }, {
-        description: "Motorists should avoid the area around Forelock and East Lake roads in Pinellas County until Thursday morning.",
-        eventTime: 1614767700000,
-        imageUrl: "assets/images/post10.png",
-        link: "",
-        favorited: false,
-        totalHeart: 150,
-        channel: 'LEWIS  PITTSBURGH',
-        totalComment: 10,
-        type: 'status'
-    }, {
-        description: "East Lake roads in Pinellas County until Thursday morning.",
-        eventTime: 162770880010,
-        imageUrl: "assets/images/post4.png",
-        link: "",
-        favorited: true,
-        totalHeart: 30,
-        channel: ' PITTSBURGH HAMILTOn',
-        totalComment: 20,
-        type: 'video'
-    }, {
-        description: "Forelock and East Lake roads in Pinellas County until Thursday morning.",
-        eventTime: 1624767709800,
-        imageUrl: "assets/images/post1.png",
-        link: "",
-        favorited: false,
-        totalHeart: 35,
-        channel: 'LEWIS',
-        totalComment: 20,
-        type: 'news'
-    }
-
-
-]
+var posts;
 var loadedCount = 0;
 var postList = document.querySelector('.home__body .post__list');
 
@@ -726,7 +548,7 @@ var postList = document.querySelector('.home__body .post__list');
 if (document.querySelector('.post__list'))
     document.onscroll = () => {
         // console.log(document.documentElement.scrollTop)
-        if (document.documentElement.scrollTop >= document.documentElement.scrollHeight - document.documentElement.clientHeight - 1 && loadedCount < 5) {
+        if (document.documentElement.scrollTop >= document.documentElement.scrollHeight - document.documentElement.clientHeight - 1 && loadedCount < 3) {
             document.querySelector('.loader').style.display = 'block';
             setTimeout(getPosts, 2000);
             loadedCount++;
@@ -738,48 +560,48 @@ if (document.querySelector('.post__list'))
 function getPosts() {
     let idPost = [],
         id = 0;
-    while (idPost.length < 19) {
+    while (idPost.length < 15) {
         id = Math.floor(Math.random() * posts.length);
         if (!idPost.includes(id)) idPost.push(id);
     }
     let htmls = '';
-    idPost.forEach(item => htmls += renderPost(posts[item]));
+    idPost.forEach(item => htmls += renderPost(posts[item], item));
     document.querySelector('.loader').style.display = 'none';
     postList.insertAdjacentHTML('beforeend', htmls);
     postAction();
     filterType();
 }
 
-function renderPost(post) {
-    let html = `<div class="post__item">
+function renderPost(post, id) {
+    let h = `<div class="post__item" id = "${id}">
     <div class="post__item-img">
-        <img src="${post.imageUrl}" alt="">
+        <img src="${post.externalImageUrl}" alt="">
     </div>
     <div class="post__content">
         <div class="post__body">
             <div class="post__item-channel">
-            ${post.channel}<span class="post__item-channel--tick"><i class="fas fa-check-circle"></i></span>
+            ${post.talent.displayName}<span class="post__item-channel--tick"><i class="fas fa-check-circle"></i></span>
                 <span class="post__readmore"><i class="fas fa-ellipsis-h"></i></span>
             </div>
             <p class="post__item-description">${post.description}
             <h6 class="post__item-description--infor"></h6>
             </p>
-            <div class="post__item-type">${post.type}</div>
+            <div class="post__item-type">${post.contentType}</div>
         </div>
         <div class="post__item-bottom">
-            <div class="post__item-bottom--day post__bottom-item">${Math.trunc((new Date() - new Date(post.eventTime))/86400000)} days ago</div>
+            <div class="post__item-bottom--day post__bottom-item">${Math.trunc((new Date() - new Date(post.createdDate))/86400000)} days ago</div>
             <div class="post__item-bottom--comment post__bottom-item">
                 <span class="post__bottom-item--icon"><i class="fas fa-comment"></i></span>
                 <span class="post__botton-item--number">${post.totalComment}</span>
             </div>
             <div class="post__item-bottom--heart post__bottom-item">
                 <span class="post__bottom-item--icon"><i class="fas fa-heart ${post.favorited? 'heart-active':''}"></i></span>
-                <span class="post__botton-item--number">${post.totalHeart}</span>
+                <span class="post__botton-item--number">${post.totalEmotion.totalLove}</span>
             </div>
         </div>
     </div>
 </div>`;
-    return html;
+    return h;
 }
 
 /* ============== Filter post by type ============== */
@@ -803,6 +625,10 @@ if (filterBtn != null) {
     filterBtn.addEventListener('click', () => {
         filterType();
         showFilter();
+        navbar_item.forEach(item => {
+            if (item.classList.contains('active-navbar'))
+                item.classList.remove('active-navbar');
+        });
     });
 }
 
@@ -824,9 +650,11 @@ function showFilter() {
 // Get options filter
 function getFilter() {
     let input = [...document.querySelectorAll('.filterByType__item input')];
-    let check, rs;
+    let check = [],
+        rs = [];
     if (document.querySelector('.filterByType__item #All').checked) {
-        rs = input.forEach(item => item.id);
+        rs = input.map(item => item.id);
+        // console.log(rs);
     } else {
         check = input.filter((item) => {
             return item.checked;

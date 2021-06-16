@@ -102,3 +102,16 @@
         }
     }
 }
+
+@mixin down() {
+    @keyframes down {
+        from {
+            top: -10%;
+            opacity: 0.6;
+        }
+        to {
+            top: 40%;
+            opacity: 1;
+        }
+    }
+}

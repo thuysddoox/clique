@@ -1,387 +1,443 @@
-/* ===================== START STYLE HOME PAGE ========================== */
-
-
-/* ----------------- DESKTOP -------------------- */
-
-.home {
-    &__header {
-        @include flex(space-between, unset);
-        @include position(fixed, 0%, 0%, auto, 0%, 0, 0);
-        padding: 16px;
-        z-index: 2;
-        background-color: white;
-        box-shadow: 0px 0px 10px #707070;
-    }
-    &__navbar {
-        @include setPadMar4(24px, 0px, 24px, 0px, 84px, 0px, 0px, 0px);
-        background-color: #FAFAF9;
-        border-bottom: 1px solid #F4F4F4;
-        z-index: 1;
-        &-list {
-            @include flexfull(space-around, center, row);
-            margin: 0 auto;
-            width: 70%;
-        }
-        &-item {
-            @extend %pointer;
-            color: #536876;
-            font-size: $fontSize-main;
-            font-weight: bold;
-            &:hover,
-            &.active-navbar {
-                color: #E60A17;
-                transition: all 0.3s;
-            }
-        }
-    }
-    &__body {
-        background-color: white;
-        margin: 0 auto;
-        width: 100%;
-    }
-}
-
-.noPost {
-    display: none;
-    color: rgba(132, 131, 131, 0.4);
-    text-align: center;
-    margin-top: 56px;
-    font-size: 32px;
-}
-
-// header
-.header {
-    &__search {
-        border-radius: 25px;
-        min-width: 20%;
-        background-color: #F5F5F5;
-        padding: 8px 16px;
-        display: inline-flex;
-        align-items: center;
-        &--text {
-            background-color: transparent;
-            padding: 0px 16px;
-            color: #707070;
-            &::placeholder {}
-        }
-    }
-    &__logo {
-        @extend %pointer;
-    }
-    &__other {
-        @include flex(space-between, unset);
-    }
-    &__icon {
-        @include flex(space-between, center);
-        color: $textColor-header-home;
-        margin-right: 24px;
-        &--item {
-            padding: 16px 24px;
-            @extend %pointer;
-            & i:hover,
-            .active-icon {
-                color: #E60A17;
-                transition: 0.3s all;
-            }
-        }
-    }
-    &__user {
-        @include flex(space-between, center);
-        &--avatar img {
-            @extend %pointer;
-            border-radius: 50%;
-            width: 100%;
-            height: auto;
-        }
-        &--down {
-            @extend %pointer;
-            color: $textColor-header-home;
-            margin-left: 16px;
-        }
-    }
-}
-
-// bar button for mobile
-.bar {
-    &__btn {
-        @extend %pointer;
-        display: none;
-        position: relative;
-        margin-right: 24px;
-        &>i {
-            @include position(absolute, 50%, auto, auto, auto, 0%, -50%);
-            display: inline-block;
-            padding: 10px;
-        }
-        &::after {
-            @include position(absolute, 70%, auto, auto, 0%, 0, 0);
-            content: '';
-            width: 300px;
-            height: 30px;
-            background-color: transparent;
-        }
-        &:hover.bar__content {
-            left: 0px;
-            transition: all 0.5s;
-        }
-    }
-    &__content {
-        @extend %pointer;
-        @include position(absolute, 100%, auto, auto, -300px, 0%, 0%);
-        z-index: 5;
-        margin: 16px 0px 0px -16px;
-        background-color: #E60A17;
-        width: 300px;
-        &-item {
-            @extend %pointer;
-            padding: 8px;
-            color: white;
-            &:hover {
-                background-color: #ff2e3c;
-                transition: all 0.3s;
-            }
-            i {
-                display: inline-block;
-                padding: 8px;
-            }
-        }
-    }
-}
-
-// filter 
-.header__icon--filter {
-    position: relative;
-    .filterByType {
-        @include slidedown();
-        @include grid2Col();
-        @include position(absolute, calc(100% + 17px), none, none, 50%, -50%, 0);
-        display: none;
-        min-width: 400px;
-        padding: 16px 48px;
-        background-color: white;
-        box-shadow: 0px 1px 3px rgb(76, 75, 75);
-        animation: slidedown 0.3s linear 1;
-        transform-origin: top left;
-        &::before {
-            @include position(absolute, -16px, none, none, 50%, -50%, 0);
-            content: '';
-            width: 0;
-            height: 0;
-            border: 8px solid;
-            border-color: transparent transparent $primary-color transparent;
-        }
-        &__item {
-            padding: 8px;
-            margin-left: 40px;
-            label {
-                display: inline-block;
-                padding: 8px;
-            }
-        }
-        .filterBtn {
-            @extend %pointer;
-            display: block;
-            color: white;
-            margin: 16px 0px;
-            border-radius: 5px;
-            background-color: $primary-color;
-            padding: 10px 0px;
-            width: 100%;
-            text-align: center;
-            font-size: $fontSize-main;
-            grid-column: 1 / 3;
-            &:hover {
-                background-color: #0a66e6;
-                transition: all 0.3s;
-            }
-        }
-    }
-}
-
-// post
-.post {
-    &__list {
-        column-count: 5;
-        column-gap: 16px;
-        margin: 10px 16px;
-    }
-    &__item {
-        color: #C0C9D5;
-        background-color: #FAFAF9;
-        border-radius: 10px;
-        box-shadow: 0px 0px 8px#c2c2c2;
-        margin: 8px 0px;
-        display: inline-block;
-        width: 100%;
-        transition: all 0.3s;
-        &:hover {
-            box-shadow: 1px 1px 10px#909090;
-            transition: all 0.3s;
-        }
-        &-img {
-            img {
-                width: 100%;
-                height: auto;
-                border-top-left-radius: 10px;
-                border-top-right-radius: 10px;
-                cursor: pointer;
-            }
-        }
-        &-channel {
-            color: #536876;
-            font-weight: bold;
-            position: relative;
-            font-size: 12px;
-            cursor: pointer;
-            text-transform: uppercase;
-            &--tick {
-                color: rgb(17, 117, 240);
-                padding: 0px 8px;
-            }
-        }
-        &-description {
-            @extend %pointer;
-            color: $textColor-main-Post;
-            padding: 14px 0px;
-            line-height: 28px;
-            &--infor {
-                font-size: 14px;
-                color: #203442;
-                padding-bottom: 8px;
-            }
-        }
-        &-type {
-            padding-bottom: 14px;
-            font-size: $font-small;
-        }
-        &-bottom {
+    /* ===================== START STYLE HOME PAGE ========================== */
+    /* ----------------- DESKTOP -------------------- */
+    
+    .home {
+        &__header {
             @include flex(space-between, unset);
-            font-size: 14px;
-            border-top: 1px solid #e9e9e9;
-            padding: 12px 10px;
-            &--comment {
-                @extend %pointer;
-                .cmt-active {
-                    color: rgb(12, 121, 231);
-                    transition: all 0.3s;
-                }
+            @include position(fixed, 0%, 0%, auto, 0%, 0, 0);
+            padding: 16px;
+            z-index: 2;
+            background-color: white;
+            box-shadow: 0px 0px 10px #707070;
+        }
+        &__navbar {
+            @include setPadMar4(24px, 0px, 24px, 0px, 84px, 0px, 0px, 0px);
+            background-color: #FAFAF9;
+            border-bottom: 1px solid #F4F4F4;
+            z-index: 1;
+            &-list {
+                @include flexfull(space-around, center, row);
+                margin: 0 auto;
+                width: 70%;
             }
-            &--heart {
+            &-item {
                 @extend %pointer;
-                .heart-active {
+                color: #536876;
+                font-size: $fontSize-main;
+                font-weight: bold;
+                &:hover,
+                &.active-navbar {
                     color: #E60A17;
                     transition: all 0.3s;
                 }
             }
         }
-    }
-    &__body {
-        padding: 10px 12px;
-    }
-    &__readmore {
-        @extend %pointer;
-        @include position(absolute, auto, 0%, auto, auto, 0, 0);
-        color: #7E8998;
-        right: 0%;
-    }
-    &__bottom {
-        &-item--icon {
-            @extend %pointer;
-            padding: 0px 6px;
+        &__body {
+            background-color: white;
+            margin: 0 auto;
+            width: 100%;
         }
     }
-}
-
-.loader {
-    display: none;
-    @include position(fixed, 50%, auto, auto, 50%, -50%, -50%);
-    width: 100%;
-    height: 100%;
-    background-color: rgba(255, 255, 255, 0.4);
-    &__icon {
-        @include position(absolute, calc(50% - 30px), auto, auto, calc(50% - 30px), 0%, 0%);
-        @include rotate();
-        animation: rotate 2s linear 3;
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        border: 8px solid #c2c2c2;
-        border-top: 8px solid $primary-color;
+    
+    .noPost {
+        display: none;
+        color: rgba(132, 131, 131, 0.4);
+        text-align: center;
+        margin-top: 56px;
+        font-size: 32px;
     }
-}
-
-
-/* ---------------- TABLET -------------------- */
-
-@include MaxMinSizeDevice(1200px, 1024px) {
-    .post__list {
-        column-count: 4;
-    }
-}
-
-@include MaxMinSizeDevice( 1023px, 768px) {
-    .home__navbar-list {
-        width: 90%;
-    }
-    .post__list {
-        column-count: 3;
-    }
-}
-
-
-/*----------------- MOBILE -------------------*/
-
-@include MaxSizeDevice( 768px) {
-    .home__header {
-        padding: 8px;
-    }
-    .bar {
-        &__btn {
-            display: block;
-        }
-        &__content {
-            margin: 8px 0px 0px -8px;
-        }
-    }
+    
+    // header
     .header {
+        &__search {
+            border-radius: 25px;
+            min-width: 20%;
+            background-color: #F5F5F5;
+            padding: 8px 16px;
+            display: inline-flex;
+            align-items: center;
+            &--text {
+                background-color: transparent;
+                padding: 0px 16px;
+                color: #707070;
+                &::placeholder {}
+            }
+        }
         &__logo {
-            transform: scale(0.85);
+            @extend %pointer;
+            margin-left: 48px;
         }
-        &__search,
-        &__icon {
-            display: none;
+        &__other {
+            @include flex(space-between, unset);
         }
         &__icon {
-            margin-right: 16px;
+            @include flex(space-between, center);
+            color: $textColor-header-home;
+            margin-right: 24px;
             &--item {
-                margin: 0px 16px;
+                padding: 8px 18px;
+                @extend %pointer;
+                & i:hover,
+                .active-icon {
+                    color: #E60A17;
+                    transition: 0.3s all;
+                }
+            }
+        }
+        &__user {
+            @include flex(space-between, center);
+            &--avatar img {
+                @extend %pointer;
+                border-radius: 50%;
+                width: 100%;
+                height: auto;
+            }
+            &--down {
+                @extend %pointer;
+                color: $textColor-header-home;
+                margin-left: 16px;
+                padding: 8px;
+            }
+            &--name {
+                margin: 0px 10px;
+                display: inline-block;
+                text-align: center;
+                font-size: 14px;
+                font-weight: bold;
+                color: rgb(11, 177, 86);
+                text-shadow: 1px 1px 5px rgb(13, 177, 112);
             }
         }
     }
-    .home__navbar {
-        &-list {
-            width: 100%;
-            display: grid;
-            grid-template-columns: auto auto auto auto;
+    
+    // bar button for mobile
+    .bar {
+        &__btn {
+            @extend %pointer;
+            display: none;
+            position: relative;
+            margin-right: 24px;
+            &>i {
+                @include position(absolute, 50%, auto, auto, auto, 0%, -50%);
+                display: inline-block;
+                padding: 10px;
+            }
+            &::after {
+                @include position(absolute, 70%, auto, auto, 0%, 0, 0);
+                content: '';
+                width: 300px;
+                height: 30px;
+                background-color: transparent;
+            }
+            &:hover.bar__content {
+                left: 0px;
+                transition: all 0.5s;
+            }
         }
-        &-item {
+        &__content {
+            @extend %pointer;
+            @include position(absolute, 100%, auto, auto, -300px, 0%, 0%);
+            z-index: 5;
+            margin: 16px 0px 0px -16px;
+            background-color: #E60A17;
+            width: 300px;
+            &-item {
+                @extend %pointer;
+                padding: 8px;
+                color: white;
+                &:hover {
+                    background-color: #ff2e3c;
+                    transition: all 0.3s;
+                }
+                i {
+                    display: inline-block;
+                    padding: 8px;
+                }
+            }
+        }
+    }
+    
+    // filter 
+    .header__icon--filter {
+        position: relative;
+        .filterByType {
+            @include slidedown();
+            @include grid2Col();
+            @include position(absolute, calc(100% + 17px), none, none, 50%, -50%, 0);
+            display: none;
+            min-width: 400px;
+            padding: 16px 48px;
+            background-color: white;
+            box-shadow: 0px 1px 3px rgb(76, 75, 75);
+            animation: slidedown 0.3s linear 1;
+            transform-origin: top left;
+            &::before {
+                @include position(absolute, -16px, none, none, 50%, -50%, 0);
+                content: '';
+                width: 0;
+                height: 0;
+                border: 8px solid;
+                border-color: transparent transparent $primary-color transparent;
+            }
+            &__item {
+                padding: 8px;
+                margin-left: 40px;
+                label {
+                    display: inline-block;
+                    padding: 8px;
+                }
+            }
+            .filterBtn {
+                @extend %pointer;
+                display: block;
+                color: white;
+                margin: 16px 0px;
+                border-radius: 5px;
+                background-color: $primary-color;
+                padding: 10px 0px;
+                width: 100%;
+                text-align: center;
+                font-size: $fontSize-main;
+                grid-column: 1 / 3;
+                &:hover {
+                    background-color: #0a66e6;
+                    transition: all 0.3s;
+                }
+            }
+        }
+    }
+    
+    // post
+    .post {
+        &__list {
+            column-count: 5;
+            column-gap: 16px;
+            margin: 10px 16px;
+        }
+        &__item {
+            color: #C0C9D5;
+            background-color: #FAFAF9;
+            border-radius: 10px;
+            box-shadow: 0px 0px 8px#c2c2c2;
             margin: 8px 0px;
-            text-align: center;
+            display: inline-block;
+            width: 100%;
+            transition: all 0.3s;
+            &:hover {
+                box-shadow: 1px 1px 10px#909090;
+                transition: all 0.3s;
+            }
+            &-img {
+                img {
+                    width: 100%;
+                    height: auto;
+                    border-top-left-radius: 10px;
+                    border-top-right-radius: 10px;
+                    cursor: pointer;
+                }
+            }
+            &-channel {
+                color: #536876;
+                font-weight: bold;
+                position: relative;
+                font-size: 12px;
+                cursor: pointer;
+                text-transform: uppercase;
+                &--tick {
+                    color: rgb(17, 117, 240);
+                    padding: 0px 8px;
+                }
+            }
+            &-description {
+                @extend %pointer;
+                color: $textColor-main-Post;
+                padding: 14px 0px;
+                line-height: 28px;
+                &--infor {
+                    font-size: 14px;
+                    color: #203442;
+                    padding-bottom: 8px;
+                }
+            }
+            &-type {
+                padding-bottom: 14px;
+                font-size: $font-small;
+            }
+            &-bottom {
+                @include flex(space-between, unset);
+                font-size: 14px;
+                border-top: 1px solid #e9e9e9;
+                padding: 12px 10px;
+                &--comment {
+                    @extend %pointer;
+                    .cmt-active {
+                        color: rgb(12, 121, 231);
+                        transition: all 0.3s;
+                    }
+                }
+                &--heart {
+                    @extend %pointer;
+                    .heart-active {
+                        color: #E60A17;
+                        transition: all 0.3s;
+                    }
+                }
+            }
+        }
+        &__body {
+            padding: 10px 12px;
+        }
+        &__readmore {
+            @extend %pointer;
+            @include position(absolute, auto, 0%, auto, auto, 0, 0);
+            color: #7E8998;
+            right: 0%;
+        }
+        &__bottom {
+            &-item--icon {
+                @extend %pointer;
+                padding: 0px 6px;
+            }
         }
     }
-    .post__list {
-        column-count: 2;
+    
+    .postFail {
+        @include position(fixed, 40%, auto, auto, 50%, -50%, -50%);
+        @include down();
+        display: none;
+        border-radius: 3px;
+        background-color: #e4e5e7;
+        font-size: $primary-color;
+        color: rgb(226, 156, 6);
+        border: 1px solid #f8ba10;
+        padding: 32px;
+        box-shadow: 1px 1px 8px #888989;
+        animation: down 0.6s ease-in;
+        min-width: max-content;
+        span {
+            padding: 0px 4px;
+        }
     }
-}
-
-@include MaxSizeDevice(525px) {
-    .bar__content {
-        width: 200px;
+    
+    .postSuccess {
+        @extend .postFail;
+        color: rgb(13, 191, 78);
+        border: 1px solid rgb(6, 197, 76);
     }
-    .home__navbar-list {
-        grid-template-columns: auto auto auto;
+    
+    .loader {
+        display: none;
+        @include position(fixed, 50%, auto, auto, 50%, -50%, -50%);
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.4);
+        &__icon {
+            @include position(absolute, calc(50% - 30px), auto, auto, calc(50% - 30px), 0%, 0%);
+            @include rotate();
+            animation: rotate 2s linear 3;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 8px solid #c2c2c2;
+            border-top: 8px solid $primary-color;
+        }
     }
-    .post__list {
-        column-count: 1;
+    /* ---------------- TABLET -------------------- */
+    
+    @include MaxMinSizeDevice(1200px, 1024px) {
+        .post__list {
+            column-count: 4;
+        }
     }
-}
+    
+    @include MaxMinSizeDevice( 1023px, 768px) {
+        .home__navbar-list {
+            width: 90%;
+        }
+        .post__list {
+            column-count: 3;
+        }
+        .header__icon {
+            margin-right: 0;
+            margin-left: 12px;
+            &--item {
+                padding: 16px;
+            }
+        }
+        .header__user--down {
+            margin-left: 8px;
+        }
+    }
+    /*----------------- MOBILE -------------------*/
+    
+    @include MaxSizeDevice( 768px) {
+        .home__header {
+            padding: 8px;
+        }
+        .bar {
+            &__btn {
+                display: block;
+            }
+            &__content {
+                margin: 8px 0px 0px -8px;
+            }
+        }
+        .header {
+            &__logo {
+                transform: scale(0.85);
+            }
+            &__search,
+            &__icon {
+                display: none;
+            }
+            &__icon {
+                &--item {
+                    margin: 0px 8px;
+                    padding: 16px;
+                }
+            }
+        }
+        .home__navbar {
+            &-list {
+                width: 100%;
+                display: grid;
+                grid-template-columns: auto auto auto auto;
+            }
+            &-item {
+                margin: 8px 0px;
+                text-align: center;
+            }
+        }
+        .post__list {
+            column-count: 2;
+        }
+    }
+    
+    @include MaxSizeDevice(525px) {
+        .bar__content {
+            width: 200px;
+        }
+        .home__navbar-list {
+            grid-template-columns: auto auto auto;
+        }
+        .post__list {
+            column-count: 1;
+        }
+        .header__user {
+            &--down {
+                margin: 0px;
+                padding: 8px;
+            }
+            &--avatar img {
+                width: 85%;
+            }
+            &--name {
+                display: none;
+            }
+        }
+        .header {
+            &__logo {
+                transform: scale(0.65);
+            }
+        }
+    }
