@@ -550,8 +550,16 @@ if (document.querySelector('.post__list'))
         // console.log(document.documentElement.scrollTop)
         if (document.documentElement.scrollTop >= document.documentElement.scrollHeight - document.documentElement.clientHeight - 1 && loadedCount < 3) {
             document.querySelector('.loader').style.display = 'block';
-            setTimeout(getPosts, 2000);
+            setTimeout(getPosts, 1500);
             loadedCount++;
+            setTimeout(function() {
+                navbar_item.forEach(item => {
+                    if (item.classList.contains('active-navbar')) {
+                        let options = [item.innerText];
+                        filterByType(options);
+                    }
+                });
+            }, 1500);
 
         }
     }
@@ -575,7 +583,7 @@ function getPosts() {
 function renderPost(post, id) {
     let h = `<div class="post__item" id = "${id}">
     <div class="post__item-img">
-        <img src="${post.externalImageUrl}" alt="">
+        <img src="${post.externalImageUrl||''}" alt="">
     </div>
     <div class="post__content">
         <div class="post__body">

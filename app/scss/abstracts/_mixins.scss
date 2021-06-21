@@ -106,7 +106,7 @@
 @mixin down() {
     @keyframes down {
         from {
-            top: -10%;
+            top: 0%;
             opacity: 0.6;
         }
         to {
