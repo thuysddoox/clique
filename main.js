@@ -75,16 +75,14 @@ function unfavorite(user, post) {
 
 function showFailHeart() {
     let notify = document.querySelector('.postFail');
-
     notify.style.display = 'block';
-    setTimeout(() => notify.style.display = 'none', 2500)
+    setTimeout(() => notify.style.display = 'none', 1200)
 }
 
 function showSuccessHeart() {
     let notify = document.querySelector('.postSuccess');
-
     notify.style.display = 'block';
-    setTimeout(() => notify.style.display = 'none', 2500)
+    setTimeout(() => notify.style.display = 'none', 1200)
 
 }
 
@@ -557,6 +555,7 @@ if (document.querySelector('.post__list'))
                     if (item.classList.contains('active-navbar')) {
                         let options = [item.innerText];
                         filterByType(options);
+
                     }
                 });
             }, 1500);
@@ -677,6 +676,7 @@ function getFilter() {
 function filterByType(option) {
     let posts = [...document.querySelectorAll('.post__item')];
     let kt = false;
+    console.log(option)
     if (option.length > 0) {
         posts.forEach(post => post.style.display = 'none');
         option.forEach((op) => {
